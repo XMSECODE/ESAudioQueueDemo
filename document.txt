@@ -1,0 +1,361 @@
+CFURLCreateWithFileSystemPath
+CFURLRef CFURLCreateWithFileSystemPath(CFAllocatorRef allocator, CFStringRef filePath, CFURLPathStyle pathStyle, Boolean isDirectory);
+
+根据flePath创建一个CFURLRef类型的文件连接：
+参数：
+CFAllocatorRef allocator：
+The allocator to use to allocate memory for the new CFURL object. Pass NULL or kCFAllocatorDefault to use the current default allocator.输入NULL或者kCFAllocatorDefault 来默认即可
+CFStringRef filePath：
+The path string to convert to a CFURL object.表示地址的C字符串
+CFURLPathStyle pathStyle：
+The operating system path style used in filePath. See CFURLPathStyle for a list of possible values.路径的类型，kCFURLPOSIXPathStyle即可。
+ Boolean isDirectory：
+A Boolean value that specifies whether filePath is treated as a directory path when resolving against relative path components. Pass true if the pathname indicates a directory, false otherwise.一般填false即可。
+
+AudioFileOpenURL 
+AudioFileOpenURL (	CFURLRef							inFileRef,
+					AudioFilePermissions				inPermissions,
+					AudioFileTypeID						inFileTypeHint,
+					AudioFileID	__nullable * __nonnull	outAudioFile)					__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
+根据CFURLRef打开文件
+参数：
+CFURLRef inFileRef：
+The URL of an existing audio file.文件的CFURLRef路径
+AudioFilePermissions inPermissions：
+The read-write permissions you want to assign to the file. Use the permission constants in AudioFilePermissions.文件打开发模式：读或写
+AudioFileTypeID inFileTypeHint：
+A hint for the file type of the designated file. For files without filename extensions and with types not easily or uniquely determined from the data (such as ADTS or AC3), use this hint to indicate the file type. Otherwise, pass 0. Only use this hint in macOS versions 10.3.1 or greater. In all earlier versions, any attempt to open these files fails.文件类型，填0则自动检测。可以指定类型。
+AudioFileID	__nullable * __nonnull	outAudioFile：
+On output, a pointer to the newly opened audio file.打开文件输出的数据。
+Return：
+A result code. See Result Codes.返回0则代表成功。
+AudioFileGetProperty
+AudioFileGetProperty(	AudioFileID				inAudioFile,
+                        AudioFilePropertyID		inPropertyID,
+                        UInt32					*ioDataSize,
+                        void					*outPropertyData)			__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_2_0);
+Gets the value of an audio file property.
+Some Core Audio property values are C types and others are Core Foundation objects.
+If you call this function to retrieve a value that is a Core Foundation object, then this function—despite the use of “Get” in its name—duplicates the object. You are responsible for releasing the object, as described in The Create Rule in Memory Management Programming Guide for Core Foundation.
+获取文件的属性。一下audio的核心属性是C类型，其他的是Core Foundation对象。如果你调用这个方法来检索一个Core Foundation对象，这个函数-尽管使用Get是这个名字-重复这个对象。你有责任来释放这个对象，在Core Foundation的内存管理程序创建规则里有描述。
+参数：
+inAudioFile	
+The audio file you want to obtain a property value from.
+你想得到属性的audio file
+inPropertyID	
+The property whose value you want. See Audio File Properties for possible values.
+这个你想得到属性的id。阅读Audio File Properties可能的属性。
+ioDataSize	
+On input, the size of the buffer passed in the outPropertyData parameter. On output, the number of bytes written to the buffer. Use the AudioFileGetPropertyInfo function to obtain the size of the property value.
+对输入来说，是输入的outPropertyData参数的缓冲区的大小。对于输出，代表写入的缓冲区的字节数。使用AudioFileGetPropertyInfo函数来获得这个属性的大小值。
+outPropertyData	
+On output, the value of the property specified in the inPropertyID parameter.
+在输出，在inPropertyID参数指定属性的值。
+Returns	
+A result code. See Result Codes.
+返回0则代表成功。
+AudioFileGetPropertyInfo
+AudioFileGetPropertyInfo(		AudioFileID				inAudioFile,
+                                AudioFilePropertyID		inPropertyID,
+                                UInt32 * __nullable		outDataSize,
+                                UInt32 * __nullable		isWritable)			__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_2_0);
+Gets information about an audio file property, including the size of the property value and whether the value is writable.
+得到关于一个audio file的信息，包括属性的大小和这个属性是否可写。
+Parameters	
+inAudioFile	
+The audio file you want to obtain property value information from.
+你想得到信息的audio file。
+inPropertyID	
+The property whose value information you want. See Audio File Properties for possible values.
+你想得到信息的属性。阅读Audio File Properties文件可能的值。
+outDataSize	
+On output, the size in bytes of the property value.
+对于输出，属性值的bytes大小。
+isWritable	
+On output, equals 1 if the property is writable, or 0 if it is read-only.
+对于输出，假如这个属性是可写的则返回1，只读的则返回0。
+Returns	
+A result code. See Result Codes.
+返回0则代表成功
+AudioQueueSetProperty
+AudioQueueSetProperty(              AudioQueueRef           inAQ,
+                                    AudioQueuePropertyID    inID,
+                                    const void *            inData,
+                                    UInt32                  inDataSize)             __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
+Sets an audio queue property value.
+设置一个audio queue的属性的值。
+Parameters	
+inAQ	
+The audio queue that you want to set a property value on.
+你想设置属性的audio queue。
+inID	
+The ID of the property whose value you want to set. See AudioQueuePropertyID.
+你想设置的属性的ID。阅读AudioQueuePropertyID。
+inData	
+The property value to set.
+设置的属性的值。
+inDataSize	
+The size of the property data.
+属性数据的大小。
+Returns	
+A result code. See Result Codes.
+返回0则代表成功
+AudioQueueNewOutput
+AudioQueueNewOutput(                const AudioStreamBasicDescription *inFormat,
+                                    AudioQueueOutputCallback        inCallbackProc,
+                                    void * __nullable               inUserData,
+                                    CFRunLoopRef __nullable         inCallbackRunLoop,
+                                    CFStringRef __nullable          inCallbackRunLoopMode,
+                                    UInt32                          inFlags,
+                                    AudioQueueRef __nullable * __nonnull outAQ)          __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
+Creates a new playback audio queue object.
+创建一个新的回放audio的队列对象。
+参数
+inFormat	
+The data format of the audio to play. For linear PCM, only interleaved formats are supported. Compressed formats are also supported.
+被播放数据的数据格式。对于线性的PCM，仅仅支持interleaved（交叉）格式。也支持压缩格式。
+inCallbackProc	
+A callback function to use with the playback audio queue. The audio queue invokes the callback when the audio queue has finished acquiring a buffer. See AudioQueueOutputCallback.
+一个用来回放audio queue的回调函数。当着gaudio queue完成播放一个缓冲区是会调用这个回调函数。阅读AudioQueueOutputCallback。
+inUserData	
+A custom data structure for use with the callback function.
+一个自定义的用来给回调函数的结构体。
+inCallbackRunLoop	
+The event loop on which the callback function pointed to by the inCallbackProc parameter is to be called. If you specify NULL, the callback is invoked on one of the audio queue’s internal threads.
+通过inCallbackProc参数指向的回调函数调用被调用的事件循环。加入你指定为NULL，这个回调会在audio queue的内部线程被调用。
+inCallbackRunLoopMode	
+The run loop mode in which to invoke the callback function specified in the inCallbackProc parameter. Typically, you pass kCFRunLoopCommonModes or use NULL, which is equivalent. You can choose to create your own thread with your own run loops. For more information on run loops, see Run Loops and CFRunLoop.
+inCallbackProc 参数指向的回调函数调用的run loop mode。特别的，你传递kCFRunLoopCommonModes 或者NULL，他们是相等的。你可以选择来创建你自己的线程和run loops。对于更多的run loops信息，阅读Run Loops和CFRunLoop。
+inFlags	
+Reserved for future use. Must be 0.
+保留字段，必须传0.
+outAQ	
+On output, the newly created playback audio queue object.
+对于输出，被创建的新的回放audio的queue对象。
+Returns	
+A result code. See Result Codes.
+返回0则代表成功。
+AudioFileReadPackets 
+AudioFileReadPackets (	AudioFileID  					inAudioFile, 
+                        Boolean							inUseCache,
+                        UInt32 *						outNumBytes,
+                        AudioStreamPacketDescription * __nullable outPacketDescriptions,
+                        SInt64							inStartingPacket, 
+                        UInt32 * 						ioNumPackets,
+                        void * __nullable				outBuffer)			__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_10, __IPHONE_2_0,__IPHONE_8_0);
+Reads a fixed duration of audio data from an audio file.
+If you do not need to read a fixed duration of audio data, but rather want to use your memory buffer most efficiently, use AudioFileReadPacketData instead of this function.
+When reading variable bit-rate (VBR) audio data, using this function requires that you allocate more memory than you would for the AudioFileReadPacketData function. See the descriptions for the outBuffer parameter in each of these two functions.
+In addition, this function is less efficient than AudioFileReadPacketData when reading compressed file formats that do not have packet tables, such as MP3 or ADTS. Use this function only when you need to read a fixed duration of audio data, or when you are reading only uncompressed audio.
+Audio File Services reads one 32-bit chunk of a file at a time.
+阅读一个来自audio file固定持续事件的audio data。
+假如你不需要阅读一个固定持续事件的audio data，而是想使用你的内存缓冲区更加有效，使用AudioFileReadPacketData 这个函数来替代这个函数。
+当读取可变bit-rate（VBR）的audio data时，使用这个方法比你使用AudioFileReadPacketData 函数需要你分配更多的内存。看这两个方法的outBuffer参数的描述。
+额外的，这个函数是比AudioFileReadPacketData 函数低效的，当你阅读压缩的file formats而没有packet tables时，或者当你在阅读的是无损的audio时。
+Audio File Services一次读取32-bit-chunk的数据。
+参数
+inAudioFile	
+The audio file whose audio packets you want to read.
+你想阅读的audio packets的audio file。
+inUseCache	
+Set to true to cache the data. Otherwise, set to false.
+设置true来缓存data。否则设置false。
+outNumBytes	
+On output, the number of bytes actually read.
+对于输出，是正真被读取的字节数。
+outPacketDescriptions	
+On output, an array of packet descriptions for the packets that were read. The array that you pass must be large enough to accommodate descriptions for the number of packets requested in the ioNumPackets parameter.
+This parameter applies only to variable bit-rate data. If the file being read contains constant bit-rate (CBR) data, such as linear PCM, this parameter does not get filled. Pass NULL if the file’s data format is CBR.
+对于输出，一个描述被读取的packets的数组。这个你传递的数组必须足够大来适应ioNumPackets 参数描述的被需要的packet的数量。
+inStartingPacket	
+The packet index of the first packet you want to read.
+你想被阅读的第一个packet的index。
+ioNumPackets	
+On input, the number of packets to read. On output, the number of packets actually read.
+You will see a difference in the input and output values when this function has reached the end of the file you are reading. In this case, the output value for this parameter is smaller than its input value.
+对于输入，表示被阅读的packets的数量。对于输出，表示实际的被阅读的数量。
+你将会看到不同的输入和输出值，当这个函数达到了这个你正在阅读文件的末尾的时候。在这种情况下，这个输出参数是小于输入值的。
+outBuffer	
+Memory that you allocate to hold the read packets. Determine an appropriate size by multiplying the number of packets requested (in the ioNumPackets parameter) by the maximum (or upper bound for) packet size of the audio file. For uncompressed audio formats, a packet is equal to a frame.
+你分配的用来处理阅读packets的内存。确定一个适当的size由这个需要的packets的数量（在ioNumPackets 参数）乘以这个audio file 的最大的packetsize。对于无损的audio formats，一个packet和一个frame是相等的。
+Returns	
+A result code. See Result Codes.
+返回0则代表成功。
+AudioFileReadPacketData 
+AudioFileReadPacketData (	AudioFileID  					inAudioFile, 
+                       		Boolean							inUseCache,
+                       		UInt32 *						ioNumBytes,
+                       		AudioStreamPacketDescription * __nullable outPacketDescriptions,
+                       		SInt64							inStartingPacket, 
+                       		UInt32 * 						ioNumPackets,
+                       		void * __nullable				outBuffer)			__OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_2_2);
+Reads packets of audio data from an audio file.
+从audio file的packets读取audio data。
+Using this function is memory efficient when reading variable bit-rate (VBR) audio data, whose packet sizes can vary for a given duration of sound.
+If the buffer you provide in the outBuffer parameter is too small to hold the packets you request in ioNumPackets, the output values of ioNumPackets and ioNumBytes are reduced to reflect the packets that were placed into the buffer. You also see a difference in the input and output values for ioNumPackets when this function has reached the end of the file you are reading. In this case, the output value for this parameter is smaller than its input value.
+This function is more efficient than AudioFileReadPackets when reading compressed file formats that do not have packet tables, such as MP3 or ADTS. This function is a good choice for reading either CBR (constant bit-rate) or VBR data if you do not need to read a fixed duration of audio. If you do need to read a fixed duration of audio, whether CBR or VBR, use AudioFileReadPackets instead.
+Audio File Services reads one 32-bit chunk of a file at a time.
+当读取variable-bit-rate（VBR）audio data时使用这个方法是高效内存的，对于一个声音持续时间的packet size是可变的。
+假如你提供的outBuffer参数的缓存是太小来处理这个你在ioNumPackets请求的packets，这个ioNumPackets 和ioNumBytes 的输出值是被减少的，反应放进缓存取的packets。你也可以看输入和输出的ioNumPackets 的差别，当这个函数达到这个你读文件的末尾的时候。在这种情况下，这个输出参数是小于输入值的。
+当读取压缩file formats时没有packet tables时，这个函数比AudioFileReadPackets 更有效率，例如MP3 or ADTS.对读取不管时CBR或者VBR数据时，如果你不需要读取固定时长的audio时，这个函数时一个好的选择。如果你需要读取一个固定时长的audio，而不是CBR或者VBR，使用AudioFileReadPackets 就行替代。
+Audio File Services一次读取32-bit-chunk的数据。
+参数：
+inAudioFile	
+The audio file whose audio packets you want to read.
+你想阅读的audio packets的audio file。
+inUseCache	
+Set to true to cache the data. Otherwise, set to false.
+设置true来缓存data。否则设置false。
+ioNumBytes	
+On input, the size of the outBuffer parameter, in bytes. On output, the number of bytes actually read.
+You will see a difference in the input and output values if the byte size for the number of packets you request in the ioNumPackets parameter is smaller than the buffer size you pass in the outBuffer parameter. In this case, the output value for this parameter is smaller than its input value.
+对于输入来说，outBuffer参数的大小，使用bytes。对于输出，这个表示真实的bytes的数量。
+加入你在ioNumPackets 参数请求的packets的数量小于你传递的outBuffer 参数的缓冲区大小时，你会看到一个不同的输入和输出值。在这种情况下，这个输出值时小于输入值的。
+outPacketDescriptions	
+On output, an array of packet descriptions for the packets that were read. The array that you pass in this parameter must be large enough to accommodate descriptions for the number of packets requested in the ioNumPackets parameter.
+This parameter applies only to variable bit-rate data. If the file being read contains constant bit-rate (CBR) data, such as linear PCM, this parameter does not get filled. Pass NULL if the file’s data format is CBR.
+对于输出，代表一个被读取的packets的packet数组。这个数组，你传递的这个参数必须足够大来适应ioNumPackets 参数请求的packets的数量。
+这个参数仅仅对于bit-rate data时有用。加入这个被读取的文件是bit-rate data，例如线性的PCM，这个参数不会被填充，假如这个data format是CBR则传递NULL。
+inStartingPacket	
+The packet index of the first packet you want to read.
+你想读取的第一个的packet的index。
+ioNumPackets	
+On input, the number of packets to read. On output, the number of packets actually read.
+对于输入，代表读取的packets的数量。对于输出，代表实际读取的packets的数量。
+outBuffer	
+Memory that you allocate to hold the read packets. Determine an appropriate size by multiplying the number of packets requested (in the ioNumPackets parameter) by the typical packet size for the audio data in the file. For uncompressed audio formats, a packet is equal to a frame.
+你分配的用来处理读取packets的内存。请求的packets的数量乘以指定的文件的packet的大小来确定一个适当的大小。对于无损的audio formats，一个packet和frame是相等的。
+Returns	
+A result code. See Result Codes.
+返回0代表成功。
+AudioQueueEnqueueBuffer
+AudioQueueEnqueueBuffer(AudioQueueRef                       inAQ,
+                       AudioQueueBufferRef                 inBuffer,
+                       UInt32                              inNumPacketDescs,
+                       const AudioStreamPacketDescription * __nullable inPacketDescs)      __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
+Adds a buffer to the buffer queue of a recording or playback audio queue.
+加入一个缓存到编码或者回播队列的缓存队里。
+Audio queue callbacks use this function to reenqueue buffers—placing them “last in line” in a buffer queue. A playback (or output) callback reenqueues a buffer after the buffer is filled with fresh audio data (typically from a file). A recording (or input) callback reenqueues a buffer after the buffer’s contents were written (typically to a file).
+Audio queue回调使用这个函数来重新排列缓存-放置他们“在线的末尾”在一个buffer queue。一个播放回调（或者输出）重新排列一个缓存在这个缓存区被填满了刷新的audio data（通常来自文件）。一个重编码（或者输出）回调重新排列一个缓存在被写的缓存的内容的后面（通常是一个文件）。
+参数	
+inAQ	
+The audio queue that owns the audio queue buffer.
+持有audio quque buffer的audio queue
+inBuffer	
+The audio queue buffer to add to the buffer queue.
+用来加入buffer queue的audio queue buffer
+inNumPacketDescs	
+The number of packets of audio data in the inBuffer parameter. Use a value of 0 for any of the following situations:
+When playing a constant bit rate (CBR) format.
+When the audio queue is a recording (input) audio queue.
+When the buffer you are reenqueuing was allocated with the AudioQueueAllocateBufferWithPacketDescriptions function. In this case, your callback should describe the buffer’s packets in the buffer’s mPacketDescriptions and mPacketDescriptionCount fields.
+在audio data参数中的packets的数量。使用一个0值可以适用以下情况：
+当播放一个CBR格式时。
+当audio queue是一个冲编码（输入）的audio queue。
+当你重新排列的buffer是通过AudioQueueAllocateBufferWithPacketDescriptions 函数分配的时。在这种情况下，你可以调用这个buffer的packets的描述字段mPacketDescriptions 和mPacketDescriptionCount 。
+inPacketDescs	
+An array of packet descriptions. Use a value of NULL for any of the following situations:
+When playing a constant bit rate (CBR) format.
+When the audio queue is an input (recording) audio queue.
+When the buffer you are reenqueuing was allocated with the AudioQueueAllocateBufferWithPacketDescriptions function. In this case, your callback should describe the buffer’s packets in the buffer’s mPacketDescriptions and mPacketDescriptionCount fields.
+一个描述pakcet的数组。使用一个NULL值适应以下情况：
+当播放CBR格式时。
+当audio queue时一个输入（重编码）的audio queue。
+当你重新排列的buffer是通过AudioQueueAllocateBufferWithPacketDescriptions 函数分配的时。在这种情况下，你可以调用这个buffer的packets的描述字段mPacketDescriptions 和mPacketDescriptionCount 
+Returns	
+A result code. See Result Codes.
+返回0则代表成功。
+AudioQueueAllocateBuffer
+AudioQueueAllocateBuffer(           AudioQueueRef           inAQ,
+                                    UInt32                  inBufferByteSize,
+                                    AudioQueueBufferRef __nullable * __nonnull outBuffer)              __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
+Asks an audio queue object to allocate an audio queue buffer.
+Once allocated, the pointer to the audio queue buffer and the buffer’s capacity cannot be changed. The buffer’s size field, mAudioDataByteSize, which indicates the amount of valid data, is initially set to 0.
+告诉一个audio queue对象来分配一个audio queue buffer。
+一旦被分配，这个指向audio queue buffer的指针和buffer的功能不能被改变。这个buffer的大小字段，mAudioDataByteSize表示可用的数据的大小，初始化时为0.
+Parameters	
+inAQ	
+The audio queue you want to allocate a buffer.
+inBufferByteSize	
+The desired capacity of the new buffer, in bytes. Appropriate capacity depends on the processing you will perform on the data as well as on the audio data format.
+新buffer的需要的容量，字节表示。适当的容量依赖于处理你需要在数据上执行的操作以及audio data format。
+outBuffer	
+On output, points to the newly allocated audio queue buffer.
+对于输出，指向一个新的audio queue buffer的指针。
+Returns	
+A result code. See Result Codes.
+返回0则代表成功。
+AudioQueueSetParameter
+AudioQueueSetParameter(             AudioQueueRef               inAQ,
+                                    AudioQueueParameterID       inParamID,
+                                    AudioQueueParameterValue    inValue)        __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
+Sets a playback audio queue parameter value.
+Use this function to change the settings for a playback audio queue directly. Changes take effect immediately. To set playback gain at the granularity of an audio queue buffer, use the AudioQueueEnqueueBufferWithParameters function.
+设置一个回播audio queue参数。
+使用这个函数来直接改变回播audio queue的设置。改变会立即发生效果。设置回播来获得一个audio queue buffer的间隔则使用AudioQueueEnqueueBufferWithParameters 函数。
+Parameters	
+inAQ	
+The playback audio queue that you want to set a parameter value on.
+你想设置参数的回播的audio queue。
+inParamID	
+The ID of the parameter you want to set. In OS X v10.5, audio queues have one parameter available: kAudioQueueParam_Volume, which controls playback gain. See Audio Queue Parameters.
+你想设置的参数的ID。在OS X v10..5，audio queues只有一个参数可以用。kAudioQueueParam_Volume，控制回播。阅读 Audio Queue Parameters.
+inValue	
+The parameter value to set.
+参数设置的值。
+Returns	
+A result code. See Result Codes.
+返回0则代表成功。
+AudioQueueStart
+AudioQueueStart(                    AudioQueueRef                     inAQ,
+                                    const AudioTimeStamp * __nullable inStartTime)        __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
+Begins playing or recording audio.
+If the associated audio device is not already running, this function starts it.
+开始播放或者重编码audio。
+加入相关的audio设备没有准备好开始，这个函数则会开始它。
+Parameters	
+inAQ	
+The audio queue to start.
+开始播放的队列。
+inDeviceStartTime	
+The time at which the audio queue should start.
+To specify a start time relative to the timeline of the associated audio device, use the mSampleTime field of the AudioTimeStamp structure. Use NULL to indicate that the audio queue should start as soon as possible.
+Audio queue开始的时间。
+通常一个开始时间相对相关的设备是线性的，使用AudioTimeStamp 结构体的mSampleTime字段。使用NULL来代表这个audio queue尽快的播放。
+Returns	
+A result code. See Result Codes.
+返回0则代表成功。
+AudioQueueStop
+AudioQueueStop(                     AudioQueueRef           inAQ,
+                                    Boolean                 inImmediate)            __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
+Stops playing or recording audio.
+This function resets an audio queue, stops the audio hardware associated with the queue if it is not in use by other audio services, and stops the audio queue. When recording, this function is typically invoked by a user. When playing back, a playback audio queue callback should call this function when there is no more audio to play.
+停止播放或者重编码。
+这个函数会重置一个audio queue，停止audio 硬件的queue，假如他没有使用其他的audio services，停止audio queu。当重编码的时候，这个函数通常是通过用户来调用。当回播的时候这里没有audio来播放的时候回播audio queue回调应该调用这个函数。
+Parameters	
+inAQ	
+The audio queue to stop.
+被停止的audio queue。
+inImmediate	
+If you pass true, stopping occurs immediately (that is, synchronously). If you pass false, the function returns immediately, but the audio queue does not stop until its queued buffers are played or recorded (that is, the stop occurs asynchronously). Audio queue callbacks are invoked as necessary until the queue actually stops.
+如果你传递true，停止会立即发送（同步）。如果你传递false，这个函数会立即返回，但是这个audio queue不会停止，直到缓存队列完成播放或者完成重编码（停止是异步的）。Audio queue回调调用是必须的，当这个queue真的停止的时候。
+Returns	
+A result code. See Result Codes.
+返回0则代表成功。
+AudioQueueDispose
+AudioQueueDispose(                  AudioQueueRef           inAQ, 
+                                    Boolean                 inImmediate)            __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
+Disposes of an audio queue.
+Disposing of an audio queue also disposes of its resources, including its buffers. After you call this function, you can no longer interact with the audio queue. In addition, the audio queue no longer invokes any callbacks.
+处理一个audio queue。
+处理一个audio queue，也处理他的资源，包括缓存。在你调用这个函数后，你不能再于audio queue就行交互，这个audio queue不会发送任何回调。
+Parameters	
+inAQ	
+The audio queue you want to dispose of.
+你想处理的audio queue。
+inImmediate	
+If you pass true, the audio queue is disposed of immediately (that is, synchronously). If you pass false, disposal does not take place until all enqueued buffers are processed (that is, asynchronously).
+如果你传递true，这个audio queue会被立即处理（同步）。如果你传递false，这个处理不会发生，直到所有的排队的buffers被处理过（异步）。
+Returns	
+A result code. See Result Codes.
+返回0则代表成功。
