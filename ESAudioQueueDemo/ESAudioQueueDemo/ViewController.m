@@ -25,6 +25,8 @@ typedef struct AQPlayerState {
 
 @interface ViewController ()
 
+@property (nonatomic, strong) NSThread *playThread;
+
 @end
 
 @implementation ViewController
@@ -32,8 +34,13 @@ typedef struct AQPlayerState {
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self initAudioQueue:@"/Users/xiangmingsheng/Music/网易云音乐/Bridge - 雾都历.mp3"];
+    self.playThread = [[NSThread alloc] initWithTarget:self selector:@selector(playMusic) object:nil];
+    
+    [self.playThread start];
+}
 
+- (void)playMusic {
+    [self initAudioQueue:@"/Users/xiang/Music/网易云音乐/Nickelback - Savin' Me.mp3"];
 }
 
 
@@ -42,12 +49,14 @@ static void HandleOutputBuffer(void* aqData,AudioQueueRef inAQ,AudioQueueBufferR
     AQPlayerState *pAqData = (AQPlayerState *) aqData;
     //    if (pAqData->mIsRunning == 0) return; // 注意苹果官方文档这里有这一句,应该是有问题,这里应该是判断如果pAqData->isDone??
     NSLog(@"回调");
-    UInt32 numBytesReadFromFile;
+    UInt32 numBytesReadFromFile = 4096;
     UInt32 numPackets = pAqData->mNumPacketsToRead;
-    AudioFileReadPackets(pAqData->mAudioFile,false,&numBytesReadFromFile,pAqData->mPacketDescs,pAqData->mCurrentPacket,&numPackets,inBuffer->mAudioData);
+//    AudioFileReadPackets(pAqData->mAudioFile,false,&numBytesReadFromFile,pAqData->mPacketDescs,pAqData->mCurrentPacket,&numPackets,inBuffer->mAudioData);
+    AudioFileReadPacketData(pAqData->mAudioFile, false, &numBytesReadFromFile, pAqData->mPacketDescs, pAqData->mCurrentPacket, &numPackets, inBuffer->mAudioData);
     
     if (numPackets > 0) {
         NSLog(@"numPackets > 0");
+        NSLog(@"播放==%zd",numBytesReadFromFile);
         inBuffer->mAudioDataByteSize = numBytesReadFromFile;
         AudioQueueEnqueueBuffer(inAQ,inBuffer,(pAqData->mPacketDescs ? numPackets : 0),pAqData->mPacketDescs);
         pAqData->mCurrentPacket += numPackets;
@@ -103,7 +112,7 @@ void DeriveBufferSize (AudioStreamBasicDescription inDesc,UInt32 maxPacketSize,F
     CFRelease(cfURL);
     //计算结构体数据大小
     UInt32 dateFormatSize = sizeof(aqData.mDataFormat);
-    NSLog(@"dateFormatSize == %d",dateFormatSize);
+    NSLog(@"dateFormatSize == %zd",dateFormatSize);
     //获取格式
     error = AudioFileGetProperty(aqData.mAudioFile, kAudioFilePropertyDataFormat, &dateFormatSize, &aqData.mDataFormat);
     if ([self checkError:error] == NO) {
@@ -135,6 +144,47 @@ void DeriveBufferSize (AudioStreamBasicDescription inDesc,UInt32 maxPacketSize,F
     //计算buffer size大小
     DeriveBufferSize(aqData.mDataFormat, maxPacketSize, 0.5, &aqData.bufferByteSize, &aqData.mNumPacketsToRead);
     
+    
+    bool isFormatVBR = (aqData.mDataFormat.mBytesPerPacket == 0 ||aqData.mDataFormat.mFramesPerPacket == 0);
+
+    if (isFormatVBR) {
+        aqData.mPacketDescs =(AudioStreamPacketDescription*) malloc (aqData.mNumPacketsToRead * sizeof (AudioStreamPacketDescription));
+    } else {
+        aqData.mPacketDescs = NULL;
+    }
+    
+    aqData.mCurrentPacket = 0;
+    //缓存
+    for (int i = 0; i < kNumberBuffers; ++i) {
+        error = AudioQueueAllocateBuffer(aqData.mQueue, aqData.bufferByteSize, &aqData.mBuffers[i]);
+        if (error != NO) {
+            NSLog(@"缓存失败");
+            return;
+        }else {
+            NSLog(@"缓存成功");
+        }
+        HandleOutputBuffer(&aqData,aqData.mQueue,aqData.mBuffers[i]);
+    }
+    
+    Float32 gain = 10.0;
+    // Optionally, allow user to override gain setting here
+    AudioQueueSetParameter (
+                            aqData.mQueue,
+                            kAudioQueueParam_Volume,
+                            gain
+                            );
+    aqData.mIsRunning = true;
+    AudioQueueStart(aqData.mQueue, NULL);
+    
+    printf("Playing...\n");
+    
+    //启动runLoop
+    //方法1
+//    do {
+//        CFRunLoopRunInMode(kCFRunLoopDefaultMode,0.25,false);
+//    } while (aqData.mIsRunning);
+    //方法2
+    [[NSRunLoop currentRunLoop] run];
     
 }
 
