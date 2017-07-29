@@ -34,13 +34,27 @@ typedef struct AQPlayerState {
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+
+}
+
+#pragma mark - Action
+- (IBAction)didClickStartButton:(id)sender {
+    
+    
     self.playThread = [[NSThread alloc] initWithTarget:self selector:@selector(playMusic) object:nil];
     
-    [self.playThread start];
+    [self.playThread start];}
+
+- (IBAction)didClickPauseButton:(id)sender {
+}
+
+- (IBAction)didClickStopButton:(id)sender {
+    [self.playThread cancel];
 }
 
 - (void)playMusic {
-    [self initAudioQueue:@"/Users/xiangmingsheng/Music/网易云音乐/Bridge - 雾都历.mp3"];
+    NSString *musicPath = [[NSBundle mainBundle] pathForResource:@"G.E.M.邓紫棋 - 喜欢你.mp3" ofType:nil];
+    [self initAudioQueue:musicPath];
 }
 
 
@@ -52,7 +66,7 @@ static void HandleOutputBuffer(void* aqData,AudioQueueRef inAQ,AudioQueueBufferR
     UInt32 numBytesReadFromFile = 4096;
     UInt32 numPackets = pAqData->mNumPacketsToRead;
 //    AudioFileReadPackets(pAqData->mAudioFile,false,&numBytesReadFromFile,pAqData->mPacketDescs,pAqData->mCurrentPacket,&numPackets,inBuffer->mAudioData);
-//    AudioFileReadPacketData(pAqData->mAudioFile, false, &numBytesReadFromFile, pAqData->mPacketDescs, pAqData->mCurrentPacket, &numPackets, inBuffer->mAudioData);
+    AudioFileReadPacketData(pAqData->mAudioFile, false, &numBytesReadFromFile, pAqData->mPacketDescs, pAqData->mCurrentPacket, &numPackets, inBuffer->mAudioData);
     
     if (numPackets > 0) {
         NSLog(@"numPackets > 0");
