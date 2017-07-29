@@ -40,7 +40,7 @@ typedef struct AQPlayerState {
 }
 
 - (void)playMusic {
-    [self initAudioQueue:@"/Users/xiang/Music/网易云音乐/Nickelback - Savin' Me.mp3"];
+    [self initAudioQueue:@"/Users/xiangmingsheng/Music/网易云音乐/Bridge - 雾都历.mp3"];
 }
 
 
@@ -52,7 +52,7 @@ static void HandleOutputBuffer(void* aqData,AudioQueueRef inAQ,AudioQueueBufferR
     UInt32 numBytesReadFromFile = 4096;
     UInt32 numPackets = pAqData->mNumPacketsToRead;
 //    AudioFileReadPackets(pAqData->mAudioFile,false,&numBytesReadFromFile,pAqData->mPacketDescs,pAqData->mCurrentPacket,&numPackets,inBuffer->mAudioData);
-    AudioFileReadPacketData(pAqData->mAudioFile, false, &numBytesReadFromFile, pAqData->mPacketDescs, pAqData->mCurrentPacket, &numPackets, inBuffer->mAudioData);
+//    AudioFileReadPacketData(pAqData->mAudioFile, false, &numBytesReadFromFile, pAqData->mPacketDescs, pAqData->mCurrentPacket, &numPackets, inBuffer->mAudioData);
     
     if (numPackets > 0) {
         NSLog(@"numPackets > 0");
