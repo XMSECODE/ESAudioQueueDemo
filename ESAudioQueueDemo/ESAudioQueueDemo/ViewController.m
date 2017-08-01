@@ -21,11 +21,14 @@ typedef struct AQPlayerState {
     UInt32                        mNumPacketsToRead;
     AudioStreamPacketDescription  *mPacketDescs;
     bool                          mIsRunning;
+    bool                          isRuning;
 }AQPlayerState;
 
 @interface ViewController ()
 
 @property (nonatomic, strong) NSThread *playThread;
+
+@property(nonatomic,assign)AQPlayerState *playerState;
 
 @end
 
@@ -49,7 +52,7 @@ typedef struct AQPlayerState {
 }
 
 - (IBAction)didClickStopButton:(id)sender {
-    [self.playThread cancel];
+    
 }
 
 - (void)playMusic {
@@ -62,15 +65,15 @@ typedef struct AQPlayerState {
 static void HandleOutputBuffer(void* aqData,AudioQueueRef inAQ,AudioQueueBufferRef inBuffer){
     AQPlayerState *pAqData = (AQPlayerState *) aqData;
     //    if (pAqData->mIsRunning == 0) return; // 注意苹果官方文档这里有这一句,应该是有问题,这里应该是判断如果pAqData->isDone??
-    NSLog(@"回调");
+//    NSLog(@"回调");
     UInt32 numBytesReadFromFile = 4096;
     UInt32 numPackets = pAqData->mNumPacketsToRead;
 //    AudioFileReadPackets(pAqData->mAudioFile,false,&numBytesReadFromFile,pAqData->mPacketDescs,pAqData->mCurrentPacket,&numPackets,inBuffer->mAudioData);
     AudioFileReadPacketData(pAqData->mAudioFile, false, &numBytesReadFromFile, pAqData->mPacketDescs, pAqData->mCurrentPacket, &numPackets, inBuffer->mAudioData);
     
     if (numPackets > 0) {
-        NSLog(@"numPackets > 0");
-        NSLog(@"播放==%zd",numBytesReadFromFile);
+//        NSLog(@"numPackets > 0");
+//        NSLog(@"播放==%zd",numBytesReadFromFile);
         inBuffer->mAudioDataByteSize = numBytesReadFromFile;
         AudioQueueEnqueueBuffer(inAQ,inBuffer,(pAqData->mPacketDescs ? numPackets : 0),pAqData->mPacketDescs);
         pAqData->mCurrentPacket += numPackets;
@@ -111,6 +114,7 @@ void DeriveBufferSize (AudioStreamBasicDescription inDesc,UInt32 maxPacketSize,F
 - (void)initAudioQueue:(NSString *)localFilePath {
     
     AQPlayerState aqData;
+    self.playerState = &aqData;
     
     CFStringRef cfFilePath = (__bridge CFStringRef)localFilePath;
     //创建url
