@@ -21,7 +21,6 @@ typedef struct AQPlayerState {
     UInt32                        mNumPacketsToRead;
     AudioStreamPacketDescription  *mPacketDescs;
     bool                          mIsRunning;
-    bool                          isRuning;
 }AQPlayerState;
 
 @interface ViewController ()
@@ -43,16 +42,22 @@ typedef struct AQPlayerState {
 #pragma mark - Action
 - (IBAction)didClickStartButton:(id)sender {
     
-    
-    self.playThread = [[NSThread alloc] initWithTarget:self selector:@selector(playMusic) object:nil];
-    
-    [self.playThread start];}
+    if (self.playThread == nil || self.playerState->mIsRunning == false) {
+        self.playThread = [[NSThread alloc] initWithTarget:self selector:@selector(playMusic) object:nil];
+        
+        [self.playThread start];
+    }else {
+        AudioQueueStart(self.playerState->mQueue, NULL);
+    }
+}
 
 - (IBAction)didClickPauseButton:(id)sender {
+    AudioQueuePause(self.playerState->mQueue);
 }
 
 - (IBAction)didClickStopButton:(id)sender {
-    
+    AudioQueueStop(self.playerState->mQueue, true);
+    self.playThread = nil;
 }
 
 - (void)playMusic {
@@ -72,8 +77,8 @@ static void HandleOutputBuffer(void* aqData,AudioQueueRef inAQ,AudioQueueBufferR
     AudioFileReadPacketData(pAqData->mAudioFile, false, &numBytesReadFromFile, pAqData->mPacketDescs, pAqData->mCurrentPacket, &numPackets, inBuffer->mAudioData);
     
     if (numPackets > 0) {
-//        NSLog(@"numPackets > 0");
 //        NSLog(@"播放==%zd",numBytesReadFromFile);
+        
         inBuffer->mAudioDataByteSize = numBytesReadFromFile;
         AudioQueueEnqueueBuffer(inAQ,inBuffer,(pAqData->mPacketDescs ? numPackets : 0),pAqData->mPacketDescs);
         pAqData->mCurrentPacket += numPackets;
