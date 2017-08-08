@@ -57,7 +57,6 @@ typedef struct AQPlayerState {
 
 - (IBAction)didClickStopButton:(id)sender {
     AudioQueueStop(self.playerState->mQueue, true);
-    self.playThread = nil;
 }
 
 - (void)playMusic {
@@ -73,7 +72,6 @@ static void HandleOutputBuffer(void* aqData,AudioQueueRef inAQ,AudioQueueBufferR
 //    NSLog(@"回调");
     UInt32 numBytesReadFromFile = 4096;
     UInt32 numPackets = pAqData->mNumPacketsToRead;
-//    AudioFileReadPackets(pAqData->mAudioFile,false,&numBytesReadFromFile,pAqData->mPacketDescs,pAqData->mCurrentPacket,&numPackets,inBuffer->mAudioData);
     AudioFileReadPacketData(pAqData->mAudioFile, false, &numBytesReadFromFile, pAqData->mPacketDescs, pAqData->mCurrentPacket, &numPackets, inBuffer->mAudioData);
     
     if (numPackets > 0) {
@@ -178,8 +176,9 @@ void DeriveBufferSize (AudioStreamBasicDescription inDesc,UInt32 maxPacketSize,F
     
     aqData.mCurrentPacket = 0;
     //缓存
+    AQPlayerState *state = self.playerState;
     for (int i = 0; i < kNumberBuffers; ++i) {
-        error = AudioQueueAllocateBuffer(aqData.mQueue, aqData.bufferByteSize, &aqData.mBuffers[i]);
+        error = AudioQueueAllocateBuffer(state->mQueue, aqData.bufferByteSize, &(state->mBuffers[i]));
         if (error != NO) {
             NSLog(@"缓存失败");
             return;
