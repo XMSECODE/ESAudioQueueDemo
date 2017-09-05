@@ -15,6 +15,12 @@
 		043CADCA1F13DF81001A0671 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 043CADC81F13DF81001A0671 /* LaunchScreen.storyboard */; };
 		046AB0391F2CC4D500B85CE8 /* Bridge - 雾都历.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 046AB0381F2CC4D500B85CE8 /* Bridge - 雾都历.mp3 */; };
 		046AB03B1F2CC5DE00B85CE8 /* G.E.M.邓紫棋 - 喜欢你.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 046AB03A1F2CC5DE00B85CE8 /* G.E.M.邓紫棋 - 喜欢你.mp3 */; };
+		F058B55E1F3C3AF8003081CF /* 1708101114545.pcm in Resources */ = {isa = PBXBuildFile; fileRef = F058B55D1F3C3AF8003081CF /* 1708101114545.pcm */; };
+		F058B5601F3C3B2C003081CF /* an.pcm in Resources */ = {isa = PBXBuildFile; fileRef = F058B55F1F3C3B2C003081CF /* an.pcm */; };
+		F058B5621F3C3DBD003081CF /* PrinRecord20170810120307.pcm in Resources */ = {isa = PBXBuildFile; fileRef = F058B5611F3C3DBD003081CF /* PrinRecord20170810120307.pcm */; };
+		F058B5641F3C48FC003081CF /* test.pcm in Resources */ = {isa = PBXBuildFile; fileRef = F058B5631F3C48FC003081CF /* test.pcm */; };
+		F058B5661F3C4CFA003081CF /* pcmHead in Resources */ = {isa = PBXBuildFile; fileRef = F058B5651F3C4CFA003081CF /* pcmHead */; };
+		F058B5691F3C5377003081CF /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = F058B5681F3C5377003081CF /* Base64.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +36,13 @@
 		043CADCB1F13DF81001A0671 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		046AB0381F2CC4D500B85CE8 /* Bridge - 雾都历.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Bridge - 雾都历.mp3"; sourceTree = "<group>"; };
 		046AB03A1F2CC5DE00B85CE8 /* G.E.M.邓紫棋 - 喜欢你.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "G.E.M.邓紫棋 - 喜欢你.mp3"; sourceTree = "<group>"; };
+		F058B55D1F3C3AF8003081CF /* 1708101114545.pcm */ = {isa = PBXFileReference; lastKnownFileType = file; path = 1708101114545.pcm; sourceTree = "<group>"; };
+		F058B55F1F3C3B2C003081CF /* an.pcm */ = {isa = PBXFileReference; lastKnownFileType = file; path = an.pcm; sourceTree = "<group>"; };
+		F058B5611F3C3DBD003081CF /* PrinRecord20170810120307.pcm */ = {isa = PBXFileReference; lastKnownFileType = file; path = PrinRecord20170810120307.pcm; sourceTree = "<group>"; };
+		F058B5631F3C48FC003081CF /* test.pcm */ = {isa = PBXFileReference; lastKnownFileType = file; path = test.pcm; sourceTree = "<group>"; };
+		F058B5651F3C4CFA003081CF /* pcmHead */ = {isa = PBXFileReference; lastKnownFileType = file; path = pcmHead; sourceTree = "<group>"; };
+		F058B5671F3C5377003081CF /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64.h; sourceTree = "<group>"; };
+		F058B5681F3C5377003081CF /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +80,13 @@
 				043CADC01F13DF81001A0671 /* ViewController.h */,
 				043CADC11F13DF81001A0671 /* ViewController.m */,
 				043CADC31F13DF81001A0671 /* Main.storyboard */,
+				F058B5671F3C5377003081CF /* Base64.h */,
+				F058B5681F3C5377003081CF /* Base64.m */,
+				F058B5651F3C4CFA003081CF /* pcmHead */,
+				F058B5631F3C48FC003081CF /* test.pcm */,
+				F058B55F1F3C3B2C003081CF /* an.pcm */,
+				F058B5611F3C3DBD003081CF /* PrinRecord20170810120307.pcm */,
+				F058B55D1F3C3AF8003081CF /* 1708101114545.pcm */,
 				046AB0381F2CC4D500B85CE8 /* Bridge - 雾都历.mp3 */,
 				046AB03A1F2CC5DE00B85CE8 /* G.E.M.邓紫棋 - 喜欢你.mp3 */,
 				043CADC61F13DF81001A0671 /* Assets.xcassets */,
@@ -116,7 +136,7 @@
 				TargetAttributes = {
 					043CADB61F13DF81001A0671 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = 592AQVU6H7;
+						DevelopmentTeam = 457L3UJ4DJ;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -144,6 +164,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F058B5641F3C48FC003081CF /* test.pcm in Resources */,
+				F058B5661F3C4CFA003081CF /* pcmHead in Resources */,
+				F058B55E1F3C3AF8003081CF /* 1708101114545.pcm in Resources */,
+				F058B5601F3C3B2C003081CF /* an.pcm in Resources */,
+				F058B5621F3C3DBD003081CF /* PrinRecord20170810120307.pcm in Resources */,
 				043CADCA1F13DF81001A0671 /* LaunchScreen.storyboard in Resources */,
 				046AB03B1F2CC5DE00B85CE8 /* G.E.M.邓紫棋 - 喜欢你.mp3 in Resources */,
 				046AB0391F2CC4D500B85CE8 /* Bridge - 雾都历.mp3 in Resources */,
@@ -159,6 +184,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F058B5691F3C5377003081CF /* Base64.m in Sources */,
 				043CADC21F13DF81001A0671 /* ViewController.m in Sources */,
 				043CADBF1F13DF81001A0671 /* AppDelegate.m in Sources */,
 				043CADBC1F13DF81001A0671 /* main.m in Sources */,
@@ -281,7 +307,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 592AQVU6H7;
+				DEVELOPMENT_TEAM = 457L3UJ4DJ;
 				INFOPLIST_FILE = ESAudioQueueDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.XMSECODE.ESAudioQueueDemo;
@@ -293,7 +319,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 592AQVU6H7;
+				DEVELOPMENT_TEAM = 457L3UJ4DJ;
 				INFOPLIST_FILE = ESAudioQueueDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.XMSECODE.ESAudioQueueDemo;
