@@ -15,6 +15,7 @@
 		043CADCA1F13DF81001A0671 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 043CADC81F13DF81001A0671 /* LaunchScreen.storyboard */; };
 		046AB0391F2CC4D500B85CE8 /* Bridge - 雾都历.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 046AB0381F2CC4D500B85CE8 /* Bridge - 雾都历.mp3 */; };
 		046AB03B1F2CC5DE00B85CE8 /* G.E.M.邓紫棋 - 喜欢你.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 046AB03A1F2CC5DE00B85CE8 /* G.E.M.邓紫棋 - 喜欢你.mp3 */; };
+		0474207B20FCF10C00CB641E /* ESCAudioQueuePlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0474207920FCF10B00CB641E /* ESCAudioQueuePlayer.m */; };
 		F058B55E1F3C3AF8003081CF /* 1708101114545.pcm in Resources */ = {isa = PBXBuildFile; fileRef = F058B55D1F3C3AF8003081CF /* 1708101114545.pcm */; };
 		F058B5601F3C3B2C003081CF /* an.pcm in Resources */ = {isa = PBXBuildFile; fileRef = F058B55F1F3C3B2C003081CF /* an.pcm */; };
 		F058B5621F3C3DBD003081CF /* PrinRecord20170810120307.pcm in Resources */ = {isa = PBXBuildFile; fileRef = F058B5611F3C3DBD003081CF /* PrinRecord20170810120307.pcm */; };
@@ -36,6 +37,8 @@
 		043CADCB1F13DF81001A0671 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		046AB0381F2CC4D500B85CE8 /* Bridge - 雾都历.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Bridge - 雾都历.mp3"; sourceTree = "<group>"; };
 		046AB03A1F2CC5DE00B85CE8 /* G.E.M.邓紫棋 - 喜欢你.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "G.E.M.邓紫棋 - 喜欢你.mp3"; sourceTree = "<group>"; };
+		0474207920FCF10B00CB641E /* ESCAudioQueuePlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESCAudioQueuePlayer.m; sourceTree = "<group>"; };
+		0474207A20FCF10B00CB641E /* ESCAudioQueuePlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESCAudioQueuePlayer.h; sourceTree = "<group>"; };
 		F058B55D1F3C3AF8003081CF /* 1708101114545.pcm */ = {isa = PBXFileReference; lastKnownFileType = file; path = 1708101114545.pcm; sourceTree = "<group>"; };
 		F058B55F1F3C3B2C003081CF /* an.pcm */ = {isa = PBXFileReference; lastKnownFileType = file; path = an.pcm; sourceTree = "<group>"; };
 		F058B5611F3C3DBD003081CF /* PrinRecord20170810120307.pcm */ = {isa = PBXFileReference; lastKnownFileType = file; path = PrinRecord20170810120307.pcm; sourceTree = "<group>"; };
@@ -80,15 +83,8 @@
 				043CADC01F13DF81001A0671 /* ViewController.h */,
 				043CADC11F13DF81001A0671 /* ViewController.m */,
 				043CADC31F13DF81001A0671 /* Main.storyboard */,
-				F058B5671F3C5377003081CF /* Base64.h */,
-				F058B5681F3C5377003081CF /* Base64.m */,
-				F058B5651F3C4CFA003081CF /* pcmHead */,
-				F058B5631F3C48FC003081CF /* test.pcm */,
-				F058B55F1F3C3B2C003081CF /* an.pcm */,
-				F058B5611F3C3DBD003081CF /* PrinRecord20170810120307.pcm */,
-				F058B55D1F3C3AF8003081CF /* 1708101114545.pcm */,
-				046AB0381F2CC4D500B85CE8 /* Bridge - 雾都历.mp3 */,
-				046AB03A1F2CC5DE00B85CE8 /* G.E.M.邓紫棋 - 喜欢你.mp3 */,
+				0474207D20FCF1E900CB641E /* Tool */,
+				0474207C20FCF1DC00CB641E /* Source */,
 				043CADC61F13DF81001A0671 /* Assets.xcassets */,
 				043CADC81F13DF81001A0671 /* LaunchScreen.storyboard */,
 				043CADCB1F13DF81001A0671 /* Info.plist */,
@@ -103,6 +99,31 @@
 				043CADBB1F13DF81001A0671 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0474207C20FCF1DC00CB641E /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				F058B5651F3C4CFA003081CF /* pcmHead */,
+				F058B5631F3C48FC003081CF /* test.pcm */,
+				F058B55F1F3C3B2C003081CF /* an.pcm */,
+				F058B5611F3C3DBD003081CF /* PrinRecord20170810120307.pcm */,
+				F058B55D1F3C3AF8003081CF /* 1708101114545.pcm */,
+				046AB0381F2CC4D500B85CE8 /* Bridge - 雾都历.mp3 */,
+				046AB03A1F2CC5DE00B85CE8 /* G.E.M.邓紫棋 - 喜欢你.mp3 */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		0474207D20FCF1E900CB641E /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+				F058B5671F3C5377003081CF /* Base64.h */,
+				F058B5681F3C5377003081CF /* Base64.m */,
+				0474207A20FCF10B00CB641E /* ESCAudioQueuePlayer.h */,
+				0474207920FCF10B00CB641E /* ESCAudioQueuePlayer.m */,
+			);
+			name = Tool;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -187,6 +208,7 @@
 				F058B5691F3C5377003081CF /* Base64.m in Sources */,
 				043CADC21F13DF81001A0671 /* ViewController.m in Sources */,
 				043CADBF1F13DF81001A0671 /* AppDelegate.m in Sources */,
+				0474207B20FCF10C00CB641E /* ESCAudioQueuePlayer.m in Sources */,
 				043CADBC1F13DF81001A0671 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
