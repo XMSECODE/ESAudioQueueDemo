@@ -90,8 +90,8 @@ void DeriveBufferSize (AudioStreamBasicDescription inDesc,UInt32 maxPacketSize,F
     if (self = [super init]) {
         self.filePath = filePath;
         NSString *queueLabel = [NSString stringWithFormat:@"play queue %@",filePath];
-        self.playQueue = dispatch_queue_create([queueLabel cStringUsingEncoding:NSUTF8StringEncoding], DISPATCH_QUEUE_SERIAL);
-        dispatch_async(self.playQueue, ^{
+        self.playQueue = dispatch_queue_create([queueLabel cStringUsingEncoding:NSUTF8StringEncoding], DISPATCH_QUEUE_CONCURRENT);
+        dispatch_sync(self.playQueue, ^{
             [self setupAudioQueue:filePath];
         });
     }
@@ -172,7 +172,7 @@ void DeriveBufferSize (AudioStreamBasicDescription inDesc,UInt32 maxPacketSize,F
 }
 
 - (void)startPlay {
-    dispatch_async(self.playQueue, ^{
+    dispatch_sync(self.playQueue, ^{
         Float32 gain = 10.0;
         
         // Optionally, allow user to override gain setting here
@@ -191,14 +191,8 @@ void DeriveBufferSize (AudioStreamBasicDescription inDesc,UInt32 maxPacketSize,F
     });
 }
 
-- (void)restartPlay {
-    dispatch_async(self.playQueue, ^{
-        AudioQueueReset(_playerState.mQueue);
-    });
-}
-
 - (void)stop {
-    dispatch_sync(self.playQueue, ^{
+    dispatch_async(self.playQueue, ^{
         AudioQueueStop(_playerState.mQueue, true);
     });
 }

@@ -108,21 +108,7 @@ int convertPcm2Wav(char *src_file, char *dst_file, int channels, int sample_rate
     return 0;
 }
 
-
-
-#pragma mark - Action
-- (IBAction)didClickStartButton:(id)sender {
-    
-    if (self.audioPlayer == nil) {
-        NSString *filePath = [[NSBundle mainBundle] pathForResource:@"G.E.M.邓紫棋 - 喜欢你.mp3" ofType:nil];
-        self.audioPlayer = [[ESCAudioQueuePlayer alloc] initWithFilePath:filePath];
-    }
-    [self.audioPlayer startPlay];
-    
-    
-    return;
-    
-    
+- (void)playPCMData {
     NSString *headPath = [[NSBundle mainBundle] pathForResource:@"pcmHead" ofType:nil];
     
     //    convertPcm2Wav([musicPath cStringUsingEncoding:NSUTF8StringEncoding], "/Users/xiang/Desktop/test.pcm", 1, 8000);
@@ -158,6 +144,15 @@ int convertPcm2Wav(char *src_file, char *dst_file, int channels, int sample_rate
         self.play = play;
         return;
     }
+}
+
+#pragma mark - Action
+- (IBAction)didClickStartButton:(id)sender {
+    if (self.audioPlayer == nil) {
+        NSString *filePath = [[NSBundle mainBundle] pathForResource:@"G.E.M.邓紫棋 - 喜欢你.mp3" ofType:nil];
+        self.audioPlayer = [[ESCAudioQueuePlayer alloc] initWithFilePath:filePath];
+    }
+    [self.audioPlayer startPlay];
 }
 
 - (IBAction)didClickPauseButton:(id)sender {

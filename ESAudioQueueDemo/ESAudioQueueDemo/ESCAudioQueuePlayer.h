@@ -14,8 +14,6 @@
 
 - (void)startPlay;
 
-- (void)restartPlay;
-
 - (void)stop;
 
 - (void)pause;
