@@ -157,7 +157,7 @@
 				TargetAttributes = {
 					043CADB61F13DF81001A0671 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = 457L3UJ4DJ;
+						DevelopmentTeam = 4SF28MHQDQ;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -329,11 +329,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 457L3UJ4DJ;
+				DEVELOPMENT_TEAM = 4SF28MHQDQ;
 				INFOPLIST_FILE = ESAudioQueueDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.XMSECODE.ESAudioQueueDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -341,11 +343,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 457L3UJ4DJ;
+				DEVELOPMENT_TEAM = 4SF28MHQDQ;
 				INFOPLIST_FILE = ESAudioQueueDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.XMSECODE.ESAudioQueueDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

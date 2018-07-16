@@ -82,6 +82,8 @@ void DeriveBufferSize (AudioStreamBasicDescription inDesc,UInt32 maxPacketSize,F
 
 @property(nonatomic,assign)AQPlayerState playerState;
 
+@property(nonatomic,assign)BOOL isPause;
+
 @end
 
 @implementation ESCAudioQueuePlayer
@@ -90,10 +92,8 @@ void DeriveBufferSize (AudioStreamBasicDescription inDesc,UInt32 maxPacketSize,F
     if (self = [super init]) {
         self.filePath = filePath;
         NSString *queueLabel = [NSString stringWithFormat:@"play queue %@",filePath];
-        self.playQueue = dispatch_queue_create([queueLabel cStringUsingEncoding:NSUTF8StringEncoding], DISPATCH_QUEUE_CONCURRENT);
-        dispatch_sync(self.playQueue, ^{
-            [self setupAudioQueue:filePath];
-        });
+        self.playQueue = dispatch_queue_create([queueLabel cStringUsingEncoding:NSUTF8StringEncoding], DISPATCH_QUEUE_SERIAL);
+        [self setupAudioQueue:filePath];
     }
     return self;
 }
@@ -172,39 +172,38 @@ void DeriveBufferSize (AudioStreamBasicDescription inDesc,UInt32 maxPacketSize,F
 }
 
 - (void)startPlay {
-    dispatch_sync(self.playQueue, ^{
-        Float32 gain = 10.0;
-        
-        // Optionally, allow user to override gain setting here
-        AudioQueueSetParameter (
-                                _playerState.mQueue,
-                                kAudioQueueParam_Volume,
-                                gain
-                                );
-        _playerState.mIsRunning = true;
-        
+    if (self.isPause == YES) {
         AudioQueueStart(_playerState.mQueue, NULL);
-        
-        printf("Playing...\n");
-        
-        [[NSRunLoop currentRunLoop] run];
-    });
+    }else {
+        dispatch_async(self.playQueue, ^{
+            Float32 gain = 10.0;
+            
+            // Optionally, allow user to override gain setting here
+            AudioQueueSetParameter (
+                                    _playerState.mQueue,
+                                    kAudioQueueParam_Volume,
+                                    gain
+                                    );
+            _playerState.mIsRunning = true;
+            
+            AudioQueueStart(_playerState.mQueue, NULL);
+            
+            printf("Playing...\n");
+            
+            [[NSRunLoop currentRunLoop] run];
+        });
+    }
+    
 }
 
 - (void)stop {
-    dispatch_async(self.playQueue, ^{
-        AudioQueueStop(_playerState.mQueue, true);
-    });
+    self.isPause = NO;
+    AudioQueueStop(_playerState.mQueue, true);
 }
 
 - (void)pause {
-    dispatch_async(self.playQueue, ^{
-        AudioQueuePause(_playerState.mQueue);
-    });
-}
-
-- (void)continuePlay {
-    
+    self.isPause = YES;
+    AudioQueuePause(_playerState.mQueue);
 }
 
 - (BOOL)checkError:(int)error {

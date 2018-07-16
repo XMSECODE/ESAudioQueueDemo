@@ -18,6 +18,4 @@
 
 - (void)pause;
 
-- (void)continuePlay;
-
 @end

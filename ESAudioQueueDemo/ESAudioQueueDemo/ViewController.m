@@ -36,8 +36,6 @@ typedef struct {
 
 @interface ViewController ()
 
-@property (nonatomic, strong) NSThread *playThread;
-
 @property (nonatomic, strong) AVAudioPlayer *play;
 
 @property(nonatomic,strong)ESCAudioQueuePlayer* audioPlayer;
@@ -52,8 +50,6 @@ typedef struct {
 //    char *ss = [[[NSBundle mainBundle] pathForResource:@"test.pcm" ofType:nil] cStringUsingEncoding:kCFStringEncodingUTF8];
 //    convertPcm2Wav(ss, "/Users/xiang/Desktop/pcmHeadt", 1, 8000);
     
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"G.E.M.邓紫棋 - 喜欢你.mp3" ofType:nil];
-    self.audioPlayer = [[ESCAudioQueuePlayer alloc] initWithFilePath:filePath];
 }
 
 
