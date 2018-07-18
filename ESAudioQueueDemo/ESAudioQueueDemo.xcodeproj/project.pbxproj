@@ -22,6 +22,8 @@
 		F058B5641F3C48FC003081CF /* test.pcm in Resources */ = {isa = PBXBuildFile; fileRef = F058B5631F3C48FC003081CF /* test.pcm */; };
 		F058B5661F3C4CFA003081CF /* pcmHead in Resources */ = {isa = PBXBuildFile; fileRef = F058B5651F3C4CFA003081CF /* pcmHead */; };
 		F058B5691F3C5377003081CF /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = F058B5681F3C5377003081CF /* Base64.m */; };
+		F079562020FED23C00F3AF26 /* ESCAudioStreamPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = F079561F20FED23C00F3AF26 /* ESCAudioStreamPlayer.m */; };
+		F079562220FED2D800F3AF26 /* vocal.pcm in Resources */ = {isa = PBXBuildFile; fileRef = F079562120FED2D700F3AF26 /* vocal.pcm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +48,9 @@
 		F058B5651F3C4CFA003081CF /* pcmHead */ = {isa = PBXFileReference; lastKnownFileType = file; path = pcmHead; sourceTree = "<group>"; };
 		F058B5671F3C5377003081CF /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64.h; sourceTree = "<group>"; };
 		F058B5681F3C5377003081CF /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64.m; sourceTree = "<group>"; };
+		F079561E20FED23C00F3AF26 /* ESCAudioStreamPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESCAudioStreamPlayer.h; sourceTree = "<group>"; };
+		F079561F20FED23C00F3AF26 /* ESCAudioStreamPlayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ESCAudioStreamPlayer.m; sourceTree = "<group>"; };
+		F079562120FED2D700F3AF26 /* vocal.pcm */ = {isa = PBXFileReference; lastKnownFileType = file; path = vocal.pcm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +109,7 @@
 		0474207C20FCF1DC00CB641E /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				F079562120FED2D700F3AF26 /* vocal.pcm */,
 				F058B5651F3C4CFA003081CF /* pcmHead */,
 				F058B5631F3C48FC003081CF /* test.pcm */,
 				F058B55F1F3C3B2C003081CF /* an.pcm */,
@@ -120,6 +126,8 @@
 			children = (
 				F058B5671F3C5377003081CF /* Base64.h */,
 				F058B5681F3C5377003081CF /* Base64.m */,
+				F079561E20FED23C00F3AF26 /* ESCAudioStreamPlayer.h */,
+				F079561F20FED23C00F3AF26 /* ESCAudioStreamPlayer.m */,
 				0474207A20FCF10B00CB641E /* ESCAudioQueuePlayer.h */,
 				0474207920FCF10B00CB641E /* ESCAudioQueuePlayer.m */,
 			);
@@ -157,7 +165,7 @@
 				TargetAttributes = {
 					043CADB61F13DF81001A0671 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = 4SF28MHQDQ;
+						DevelopmentTeam = NZ6KCMA9HH;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -188,6 +196,7 @@
 				F058B5641F3C48FC003081CF /* test.pcm in Resources */,
 				F058B5661F3C4CFA003081CF /* pcmHead in Resources */,
 				F058B55E1F3C3AF8003081CF /* 1708101114545.pcm in Resources */,
+				F079562220FED2D800F3AF26 /* vocal.pcm in Resources */,
 				F058B5601F3C3B2C003081CF /* an.pcm in Resources */,
 				F058B5621F3C3DBD003081CF /* PrinRecord20170810120307.pcm in Resources */,
 				043CADCA1F13DF81001A0671 /* LaunchScreen.storyboard in Resources */,
@@ -206,6 +215,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F058B5691F3C5377003081CF /* Base64.m in Sources */,
+				F079562020FED23C00F3AF26 /* ESCAudioStreamPlayer.m in Sources */,
 				043CADC21F13DF81001A0671 /* ViewController.m in Sources */,
 				043CADBF1F13DF81001A0671 /* AppDelegate.m in Sources */,
 				0474207B20FCF10C00CB641E /* ESCAudioQueuePlayer.m in Sources */,
@@ -329,7 +339,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 4SF28MHQDQ;
+				DEVELOPMENT_TEAM = NZ6KCMA9HH;
 				INFOPLIST_FILE = ESAudioQueueDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -343,7 +353,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 4SF28MHQDQ;
+				DEVELOPMENT_TEAM = NZ6KCMA9HH;
 				INFOPLIST_FILE = ESAudioQueueDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

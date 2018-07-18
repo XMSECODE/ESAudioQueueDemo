@@ -10,6 +10,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "Base64.h"
 #import "ESCAudioQueuePlayer.h"
+#import "ESCAudioStreamPlayer.h"
 
 typedef struct {
     char fccID[4];
@@ -40,15 +41,51 @@ typedef struct {
 
 @property(nonatomic,strong)ESCAudioQueuePlayer* audioPlayer;
 
+@property(nonatomic,strong)ESCAudioStreamPlayer* streamPlayer;
+
 @end
 
 @implementation ViewController
 
+void audioQueueOutputCallback(
+                                 void * __nullable       inUserData,
+                                 AudioQueueRef           inAQ,
+                              AudioQueueBufferRef     inBuffer){
+    
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    self.streamPlayer = [[ESCAudioStreamPlayer alloc] initWithSampleRate:44100 formatID:kAudioFormatLinearPCM formatFlags:kAudioFormatFlagIsSignedInteger | kAudioFormatFlagIsPacked channelsPerFrame:2 bitsPerChannel:16 framesPerPacket:1];
+    NSString *pcmFilePath = [[NSBundle mainBundle] pathForResource:@"vocal.pcm" ofType:nil];
+
+//    self.streamPlayer = [[ESCAudioStreamPlayer alloc] initWithSampleRate:8000 formatID:kAudioFormatLinearPCM formatFlags:kAudioFormatFlagIsSignedInteger | kAudioFormatFlagIsPacked channelsPerFrame:1 bitsPerChannel:16];
+//    NSString *pcmFilePath = [[NSBundle mainBundle] pathForResource:@"1708101114545.pcm" ofType:nil];
+//
+   
     
-//    char *ss = [[[NSBundle mainBundle] pathForResource:@"test.pcm" ofType:nil] cStringUsingEncoding:kCFStringEncodingUTF8];
-//    convertPcm2Wav(ss, "/Users/xiang/Desktop/pcmHeadt", 1, 8000);
+    NSData *pcmData = [NSData dataWithContentsOfFile:pcmFilePath];
+    NSInteger count = 100;
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        for (int i = 0; i < 30; i++) {
+            NSInteger lenth = pcmData.length / count;
+            NSData *pcmDatarange = [pcmData subdataWithRange:NSMakeRange(i * lenth, lenth)];
+//            NSLog(@"encode buffer %d==%d",i,lenth);
+            [self.streamPlayer play:pcmDatarange];
+        }
+        //模拟中断
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_global_queue(0, 0), ^{
+            for (int i = 0; i < count; i++) {
+                NSInteger lenth = pcmData.length / count;
+                NSData *pcmDatarange = [pcmData subdataWithRange:NSMakeRange(i * lenth, lenth)];
+                //            NSLog(@"encode buffer %d==%d",i,lenth);
+                [self.streamPlayer play:pcmDatarange];
+                
+            }
+        });
+    });
     
 }
 
