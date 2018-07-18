@@ -58,37 +58,41 @@ void audioQueueOutputCallback(
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+}
+- (IBAction)didClickStopPCMDataButton:(id)sender {
+    [self.streamPlayer stop];
+}
+
+- (IBAction)didClickPlayPCMStreamButton:(id)sender {
     self.streamPlayer = [[ESCAudioStreamPlayer alloc] initWithSampleRate:44100 formatID:kAudioFormatLinearPCM formatFlags:kAudioFormatFlagIsSignedInteger | kAudioFormatFlagIsPacked channelsPerFrame:2 bitsPerChannel:16 framesPerPacket:1];
     NSString *pcmFilePath = [[NSBundle mainBundle] pathForResource:@"vocal.pcm" ofType:nil];
-
-//    self.streamPlayer = [[ESCAudioStreamPlayer alloc] initWithSampleRate:8000 formatID:kAudioFormatLinearPCM formatFlags:kAudioFormatFlagIsSignedInteger | kAudioFormatFlagIsPacked channelsPerFrame:1 bitsPerChannel:16];
-//    NSString *pcmFilePath = [[NSBundle mainBundle] pathForResource:@"1708101114545.pcm" ofType:nil];
-//
-   
+    
+    //    self.streamPlayer = [[ESCAudioStreamPlayer alloc] initWithSampleRate:8000 formatID:kAudioFormatLinearPCM formatFlags:kAudioFormatFlagIsSignedInteger | kAudioFormatFlagIsPacked channelsPerFrame:1 bitsPerChannel:16];
+    //    NSString *pcmFilePath = [[NSBundle mainBundle] pathForResource:@"1708101114545.pcm" ofType:nil];
+    //
+    
     
     NSData *pcmData = [NSData dataWithContentsOfFile:pcmFilePath];
     NSInteger count = 100;
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        for (int i = 0; i < 30; i++) {
+        for (int i = 0; i < count; i++) {
             NSInteger lenth = pcmData.length / count;
             NSData *pcmDatarange = [pcmData subdataWithRange:NSMakeRange(i * lenth, lenth)];
-//            NSLog(@"encode buffer %d==%d",i,lenth);
+            //            NSLog(@"encode buffer %d==%d",i,lenth);
             [self.streamPlayer play:pcmDatarange];
         }
         //模拟中断
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_global_queue(0, 0), ^{
-            for (int i = 0; i < count; i++) {
-                NSInteger lenth = pcmData.length / count;
-                NSData *pcmDatarange = [pcmData subdataWithRange:NSMakeRange(i * lenth, lenth)];
-                //            NSLog(@"encode buffer %d==%d",i,lenth);
-                [self.streamPlayer play:pcmDatarange];
-                
-            }
-        });
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_global_queue(0, 0), ^{
+//            for (int i = 0; i < count; i++) {
+//                NSInteger lenth = pcmData.length / count;
+//                NSData *pcmDatarange = [pcmData subdataWithRange:NSMakeRange(i * lenth, lenth)];
+//                //            NSLog(@"encode buffer %d==%d",i,lenth);
+//                [self.streamPlayer play:pcmDatarange];
+//
+//            }
+//        });
     });
-    
 }
-
 
 int convertPcm2Wav(char *src_file, char *dst_file, int channels, int sample_rate) {
     int bits = 16; //以下是为了建立.wav头而准备的变量

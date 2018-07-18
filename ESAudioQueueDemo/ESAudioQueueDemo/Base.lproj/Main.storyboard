@@ -21,56 +21,85 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OUh-nb-9XC">
-                                <rect key="frame" x="154.5" y="120" width="66" height="30"/>
-                                <state key="normal" title="开始/继续"/>
-                                <connections>
-                                    <action selector="didClickStartButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="S39-j9-MWR"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IcN-3J-e76">
-                                <rect key="frame" x="172" y="200" width="31" height="30"/>
-                                <state key="normal" title="暂停"/>
-                                <connections>
-                                    <action selector="didClickPauseButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oIo-dq-zoI"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uma-1E-okz">
-                                <rect key="frame" x="172" y="280" width="31" height="30"/>
-                                <state key="normal" title="停止"/>
-                                <connections>
-                                    <action selector="didClickStopButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Psy-uk-3f4"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="14D-jY-Eou">
-                                <rect key="frame" x="199" y="61" width="42" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hyZ-5O-jnj">
-                                <rect key="frame" x="103" y="60" width="42" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Tu-dB-AB8">
+                                <rect key="frame" x="0.0" y="20" width="375" height="200"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OUh-nb-9XC">
+                                        <rect key="frame" x="108" y="20" width="159" height="30"/>
+                                        <state key="normal" title="开始/继续（本地MP3）"/>
+                                        <connections>
+                                            <action selector="didClickStartButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="S39-j9-MWR"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IcN-3J-e76">
+                                        <rect key="frame" x="125.5" y="70" width="124" height="30"/>
+                                        <state key="normal" title="暂停（本地MP3）"/>
+                                        <connections>
+                                            <action selector="didClickPauseButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oIo-dq-zoI"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uma-1E-okz">
+                                        <rect key="frame" x="125.5" y="120" width="124" height="30"/>
+                                        <state key="normal" title="停止（本地MP3）"/>
+                                        <connections>
+                                            <action selector="didClickStopButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Psy-uk-3f4"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="OUh-nb-9XC" firstAttribute="top" secondItem="0Tu-dB-AB8" secondAttribute="top" constant="20" id="5kE-WA-Mzt"/>
+                                    <constraint firstItem="OUh-nb-9XC" firstAttribute="centerX" secondItem="0Tu-dB-AB8" secondAttribute="centerX" id="Ifv-bH-R9h"/>
+                                    <constraint firstItem="IcN-3J-e76" firstAttribute="top" secondItem="OUh-nb-9XC" secondAttribute="bottom" constant="20" id="RKy-xE-uKb"/>
+                                    <constraint firstItem="Uma-1E-okz" firstAttribute="centerX" secondItem="0Tu-dB-AB8" secondAttribute="centerX" id="VhH-Qy-mtQ"/>
+                                    <constraint firstAttribute="height" constant="200" id="dic-vi-p5y"/>
+                                    <constraint firstItem="IcN-3J-e76" firstAttribute="centerX" secondItem="0Tu-dB-AB8" secondAttribute="centerX" id="lOr-tt-cfr"/>
+                                    <constraint firstItem="Uma-1E-okz" firstAttribute="top" secondItem="IcN-3J-e76" secondAttribute="bottom" constant="20" id="wRj-Nv-PIX"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="otJ-MO-1zu">
+                                <rect key="frame" x="0.0" y="220" width="375" height="200"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yod-6j-uR7">
+                                        <rect key="frame" x="119" y="20" width="137" height="30"/>
+                                        <state key="normal" title="开始播放模拟pcm流"/>
+                                        <connections>
+                                            <action selector="didClickPlayPCMStreamButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7LH-eg-ceJ"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KLR-Hi-lxJ">
+                                        <rect key="frame" x="141.5" y="70" width="92" height="30"/>
+                                        <state key="normal" title="停止播放pcm"/>
+                                        <connections>
+                                            <action selector="didClickStopPCMDataButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Zri-Yc-jOx"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="Yod-6j-uR7" firstAttribute="top" secondItem="otJ-MO-1zu" secondAttribute="top" constant="20" id="2X5-X2-dXT"/>
+                                    <constraint firstAttribute="height" constant="200" id="F3h-Hs-TXN"/>
+                                    <constraint firstItem="KLR-Hi-lxJ" firstAttribute="centerX" secondItem="otJ-MO-1zu" secondAttribute="centerX" id="WFC-Ga-RvF"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="200" id="jJu-hP-gOu"/>
+                                    <constraint firstItem="Yod-6j-uR7" firstAttribute="centerX" secondItem="otJ-MO-1zu" secondAttribute="centerX" id="q1l-jE-Yzg"/>
+                                    <constraint firstItem="KLR-Hi-lxJ" firstAttribute="top" secondItem="Yod-6j-uR7" secondAttribute="bottom" constant="20" id="ysc-7J-zZ1"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="OUh-nb-9XC" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="100" id="5Eq-5n-Ld2"/>
-                            <constraint firstItem="IcN-3J-e76" firstAttribute="top" secondItem="OUh-nb-9XC" secondAttribute="bottom" constant="50" id="65C-x0-xiz"/>
-                            <constraint firstItem="IcN-3J-e76" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Eyt-aV-5XT"/>
-                            <constraint firstItem="OUh-nb-9XC" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Gll-c5-xOa"/>
-                            <constraint firstItem="Uma-1E-okz" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="sHf-Yc-PLA"/>
-                            <constraint firstItem="Uma-1E-okz" firstAttribute="top" secondItem="IcN-3J-e76" secondAttribute="bottom" constant="50" id="tMq-cI-46Q"/>
+                            <constraint firstAttribute="trailing" secondItem="0Tu-dB-AB8" secondAttribute="trailing" id="U1G-zX-bwH"/>
+                            <constraint firstAttribute="trailing" secondItem="otJ-MO-1zu" secondAttribute="trailing" id="Zxd-3r-pnU"/>
+                            <constraint firstItem="otJ-MO-1zu" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="d81-MN-IYi"/>
+                            <constraint firstItem="0Tu-dB-AB8" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="dLa-tr-kRe"/>
+                            <constraint firstItem="otJ-MO-1zu" firstAttribute="top" secondItem="0Tu-dB-AB8" secondAttribute="bottom" id="mJx-OO-dLn"/>
+                            <constraint firstItem="0Tu-dB-AB8" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="v0M-DI-BYj"/>
                         </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="111" y="65"/>
+            <point key="canvasLocation" x="109.59999999999999" y="64.31784107946028"/>
         </scene>
     </scenes>
 </document>

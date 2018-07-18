@@ -90,7 +90,6 @@
 				043CADC31F13DF81001A0671 /* Main.storyboard */,
 				0474207D20FCF1E900CB641E /* Tool */,
 				0474207C20FCF1DC00CB641E /* Source */,
-				043CADC61F13DF81001A0671 /* Assets.xcassets */,
 				043CADC81F13DF81001A0671 /* LaunchScreen.storyboard */,
 				043CADCB1F13DF81001A0671 /* Info.plist */,
 				043CADBA1F13DF81001A0671 /* Supporting Files */,
@@ -109,6 +108,7 @@
 		0474207C20FCF1DC00CB641E /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				043CADC61F13DF81001A0671 /* Assets.xcassets */,
 				F079562120FED2D700F3AF26 /* vocal.pcm */,
 				F058B5651F3C4CFA003081CF /* pcmHead */,
 				F058B5631F3C48FC003081CF /* test.pcm */,
