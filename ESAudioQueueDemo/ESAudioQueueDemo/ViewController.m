@@ -47,14 +47,6 @@ typedef struct {
 
 @implementation ViewController
 
-void audioQueueOutputCallback(
-                                 void * __nullable       inUserData,
-                                 AudioQueueRef           inAQ,
-                              AudioQueueBufferRef     inBuffer){
-    
-}
-
-
 - (void)viewDidLoad {
     [super viewDidLoad];
 
