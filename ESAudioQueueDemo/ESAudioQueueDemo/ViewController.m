@@ -11,6 +11,7 @@
 #import "Base64.h"
 #import "ESCAudioQueuePlayer.h"
 #import "ESCAudioStreamPlayer.h"
+#import "ESCAudioRecorder.h"
 
 typedef struct {
     char fccID[4];
@@ -35,13 +36,23 @@ typedef struct {
 } DATA;
 
 
-@interface ViewController ()
+@interface ViewController () <ESCAudioRecorderDelegate>
 
 @property (nonatomic, strong) AVAudioPlayer *play;
 
 @property(nonatomic,strong)ESCAudioQueuePlayer* audioPlayer;
 
 @property(nonatomic,strong)ESCAudioStreamPlayer* streamPlayer;
+
+@property(nonatomic,strong)ESCAudioRecorder* audioRecorder;
+@property(nonatomic,copy)NSString* recordFilePath;
+@property(nonatomic,strong)AVAudioPlayer* avaudioPlayer;
+
+
+@property(nonatomic,strong)ESCAudioStreamPlayer* recorderFileStreamPlayer;
+@property(nonatomic,strong)ESCAudioRecorder* audioStreamRecorder;
+@property(nonatomic,copy)NSString* recordFileStreamPath;
+@property(nonatomic,strong)NSFileHandle* audioStreamFileHandle;
 
 @end
 
@@ -50,40 +61,9 @@ typedef struct {
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-}
-- (IBAction)didClickStopPCMDataButton:(id)sender {
-    [self.streamPlayer stop];
-}
-
-- (IBAction)didClickPlayPCMStreamButton:(id)sender {
-    self.streamPlayer = [[ESCAudioStreamPlayer alloc] initWithSampleRate:44100 formatID:kAudioFormatLinearPCM formatFlags:kAudioFormatFlagIsSignedInteger | kAudioFormatFlagIsPacked channelsPerFrame:2 bitsPerChannel:16 framesPerPacket:1];
-    NSString *pcmFilePath = [[NSBundle mainBundle] pathForResource:@"vocal.pcm" ofType:nil];
-    
-    //    self.streamPlayer = [[ESCAudioStreamPlayer alloc] initWithSampleRate:8000 formatID:kAudioFormatLinearPCM formatFlags:kAudioFormatFlagIsSignedInteger | kAudioFormatFlagIsPacked channelsPerFrame:1 bitsPerChannel:16];
-    //    NSString *pcmFilePath = [[NSBundle mainBundle] pathForResource:@"1708101114545.pcm" ofType:nil];
-    //
-    
-    
-    NSData *pcmData = [NSData dataWithContentsOfFile:pcmFilePath];
-    NSInteger count = 100;
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        for (int i = 0; i < count; i++) {
-            NSInteger lenth = pcmData.length / count;
-            NSData *pcmDatarange = [pcmData subdataWithRange:NSMakeRange(i * lenth, lenth)];
-            //            NSLog(@"encode buffer %d==%d",i,lenth);
-            [self.streamPlayer play:pcmDatarange];
-        }
-        //模拟中断
-//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_global_queue(0, 0), ^{
-//            for (int i = 0; i < count; i++) {
-//                NSInteger lenth = pcmData.length / count;
-//                NSData *pcmDatarange = [pcmData subdataWithRange:NSMakeRange(i * lenth, lenth)];
-//                //            NSLog(@"encode buffer %d==%d",i,lenth);
-//                [self.streamPlayer play:pcmDatarange];
-//
-//            }
-//        });
-    });
+    NSString *filePath = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).lastObject;
+    self.recordFilePath = [NSString stringWithFormat:@"%@/test.pcm",filePath];
+     self.recordFileStreamPath = [NSString stringWithFormat:@"%@/teststream.pcm",filePath];
 }
 
 int convertPcm2Wav(char *src_file, char *dst_file, int channels, int sample_rate) {
@@ -193,4 +173,108 @@ int convertPcm2Wav(char *src_file, char *dst_file, int channels, int sample_rate
     self.audioPlayer = nil;
 }
 
+- (IBAction)didClickStopPCMDataButton:(id)sender {
+    [self.streamPlayer stop];
+}
+
+- (IBAction)didClickPlayPCMStreamButton:(id)sender {
+    self.streamPlayer = [[ESCAudioStreamPlayer alloc] initWithSampleRate:44100 formatID:kAudioFormatLinearPCM formatFlags:kAudioFormatFlagIsSignedInteger | kAudioFormatFlagIsPacked channelsPerFrame:2 bitsPerChannel:16 framesPerPacket:1];
+    NSString *pcmFilePath = [[NSBundle mainBundle] pathForResource:@"vocal.pcm" ofType:nil];
+    
+    //    self.streamPlayer = [[ESCAudioStreamPlayer alloc] initWithSampleRate:8000 formatID:kAudioFormatLinearPCM formatFlags:kAudioFormatFlagIsSignedInteger | kAudioFormatFlagIsPacked channelsPerFrame:1 bitsPerChannel:16];
+    //    NSString *pcmFilePath = [[NSBundle mainBundle] pathForResource:@"1708101114545.pcm" ofType:nil];
+    //
+    
+    
+    NSData *pcmData = [NSData dataWithContentsOfFile:pcmFilePath];
+    NSInteger count = 100;
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        for (int i = 0; i < count; i++) {
+            NSInteger lenth = pcmData.length / count;
+            NSData *pcmDatarange = [pcmData subdataWithRange:NSMakeRange(i * lenth, lenth)];
+            //            NSLog(@"encode buffer %d==%d",i,lenth);
+            [self.streamPlayer play:pcmDatarange];
+        }
+        //模拟中断
+        //        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_global_queue(0, 0), ^{
+        //            for (int i = 0; i < count; i++) {
+        //                NSInteger lenth = pcmData.length / count;
+        //                NSData *pcmDatarange = [pcmData subdataWithRange:NSMakeRange(i * lenth, lenth)];
+        //                //            NSLog(@"encode buffer %d==%d",i,lenth);
+        //                [self.streamPlayer play:pcmDatarange];
+        //
+        //            }
+        //        });
+    });
+}
+
+- (IBAction)didClickRecordAudioFileButton:(id)sender {
+    if (self.audioRecorder == nil) {
+        self.audioRecorder = [[ESCAudioRecorder alloc] initWithSampleRate:24000 formatID:kAudioFormatLinearPCM formatFlags:kAudioFormatFlagIsSignedInteger | kAudioFormatFlagIsPacked channelsPerFrame:1 bitsPerChannel:32 framesPerPacket:1];
+    }
+    
+    [self.audioRecorder startRecordToFilePath:self.recordFilePath];
+}
+
+- (IBAction)didClickStopRecordAudioFileButton:(id)sender {
+    [self.audioRecorder stopRecordToFile];
+}
+
+- (IBAction)didClickStartPlayRecordAudioFileButton:(id)sender {
+    
+    
+    NSData *pcmData = [NSData dataWithContentsOfFile:self.recordFilePath];
+    NSError *error;
+    AVAudioPlayer *avaudioPlayer = [[AVAudioPlayer alloc] initWithData:pcmData error:&error];
+    [avaudioPlayer play];
+    self.avaudioPlayer = avaudioPlayer;
+    
+}
+
+- (IBAction)didClickStopPlayRecordAudioFileButton:(id)sender {
+    [self.avaudioPlayer stop];
+}
+
+- (IBAction)didClickRecordFileStreamButton:(id)sender {
+    
+    NSError *error;
+    if ([[NSFileManager defaultManager] fileExistsAtPath:self.recordFileStreamPath]) {
+        [[NSFileManager defaultManager] removeItemAtPath:self.recordFileStreamPath error:&error];
+    }
+    [[NSFileManager defaultManager] createFileAtPath:self.recordFileStreamPath contents:nil attributes:nil];
+    self.audioStreamFileHandle = [NSFileHandle fileHandleForWritingAtPath:self.recordFileStreamPath];
+    
+    self.audioStreamRecorder = [[ESCAudioRecorder alloc] initWithSampleRate:24000 formatID:kAudioFormatLinearPCM formatFlags:kAudioFormatFlagIsSignedInteger | kAudioFormatFlagIsPacked channelsPerFrame:1 bitsPerChannel:32 framesPerPacket:1];
+    self.audioStreamRecorder.delegate = self;
+    [self.audioStreamRecorder startRecordToStream];
+}
+
+- (IBAction)didClickStopRecordFileStreamButton:(id)sender {
+    [self.audioStreamRecorder stopRecordToStream];
+    [self.audioStreamFileHandle closeFile];
+}
+
+- (IBAction)didClickStartPlayFileStreamButton:(id)sender {
+    
+    NSData *pcmData = [NSData dataWithContentsOfFile:self.recordFileStreamPath];
+    
+    self.recorderFileStreamPlayer = [[ESCAudioStreamPlayer alloc] initWithSampleRate:24000 formatID:kAudioFormatLinearPCM formatFlags:kAudioFormatFlagIsSignedInteger | kAudioFormatFlagIsPacked channelsPerFrame:1 bitsPerChannel:32 framesPerPacket:1];
+    NSInteger count = 100;
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        for (int i = 0; i < count; i++) {
+            NSInteger lenth = pcmData.length / count;
+            NSData *pcmDatarange = [pcmData subdataWithRange:NSMakeRange(i * lenth, lenth)];
+            //            NSLog(@"encode buffer %d==%d",i,lenth);
+            [self.recorderFileStreamPlayer play:pcmDatarange];
+        }
+    });
+}
+- (IBAction)didClickStopPlayFileStreamButton:(id)sender {
+    [self.recorderFileStreamPlayer stop];
+}
+
+#pragma mark - ESCAudioRecorderDelegate
+- (void)ESCAudioRecorderReceiveAudioData:(NSData *)audioData {
+    [self.audioStreamFileHandle writeData:audioData];
+}
 @end

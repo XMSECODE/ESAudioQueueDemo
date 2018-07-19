@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -22,7 +23,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Tu-dB-AB8">
-                                <rect key="frame" x="0.0" y="20" width="375" height="200"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="180"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OUh-nb-9XC">
                                         <rect key="frame" x="108" y="20" width="159" height="30"/>
@@ -45,20 +46,30 @@
                                             <action selector="didClickStopButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Psy-uk-3f4"/>
                                         </connections>
                                     </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9bz-Mm-77d">
+                                        <rect key="frame" x="0.0" y="179" width="375" height="1"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="Hwr-bg-Ddo"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="OUh-nb-9XC" firstAttribute="top" secondItem="0Tu-dB-AB8" secondAttribute="top" constant="20" id="5kE-WA-Mzt"/>
                                     <constraint firstItem="OUh-nb-9XC" firstAttribute="centerX" secondItem="0Tu-dB-AB8" secondAttribute="centerX" id="Ifv-bH-R9h"/>
+                                    <constraint firstAttribute="bottom" secondItem="9bz-Mm-77d" secondAttribute="bottom" id="NxU-n7-sKA"/>
                                     <constraint firstItem="IcN-3J-e76" firstAttribute="top" secondItem="OUh-nb-9XC" secondAttribute="bottom" constant="20" id="RKy-xE-uKb"/>
                                     <constraint firstItem="Uma-1E-okz" firstAttribute="centerX" secondItem="0Tu-dB-AB8" secondAttribute="centerX" id="VhH-Qy-mtQ"/>
-                                    <constraint firstAttribute="height" constant="200" id="dic-vi-p5y"/>
+                                    <constraint firstItem="9bz-Mm-77d" firstAttribute="leading" secondItem="0Tu-dB-AB8" secondAttribute="leading" id="dE8-b8-pCo"/>
+                                    <constraint firstAttribute="height" constant="180" id="dic-vi-p5y"/>
                                     <constraint firstItem="IcN-3J-e76" firstAttribute="centerX" secondItem="0Tu-dB-AB8" secondAttribute="centerX" id="lOr-tt-cfr"/>
+                                    <constraint firstAttribute="trailing" secondItem="9bz-Mm-77d" secondAttribute="trailing" id="qVy-8k-gqo"/>
                                     <constraint firstItem="Uma-1E-okz" firstAttribute="top" secondItem="IcN-3J-e76" secondAttribute="bottom" constant="20" id="wRj-Nv-PIX"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="otJ-MO-1zu">
-                                <rect key="frame" x="0.0" y="220" width="375" height="200"/>
+                                <rect key="frame" x="0.0" y="200" width="375" height="120"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yod-6j-uR7">
                                         <rect key="frame" x="119" y="20" width="137" height="30"/>
@@ -74,24 +85,139 @@
                                             <action selector="didClickStopPCMDataButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Zri-Yc-jOx"/>
                                         </connections>
                                     </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xtm-bH-9vz">
+                                        <rect key="frame" x="0.0" y="119" width="375" height="1"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="JET-ZF-CZg"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="Yod-6j-uR7" firstAttribute="top" secondItem="otJ-MO-1zu" secondAttribute="top" constant="20" id="2X5-X2-dXT"/>
-                                    <constraint firstAttribute="height" constant="200" id="F3h-Hs-TXN"/>
+                                    <constraint firstAttribute="bottom" secondItem="xtm-bH-9vz" secondAttribute="bottom" id="9oZ-SJ-phD"/>
+                                    <constraint firstAttribute="height" constant="120" id="F3h-Hs-TXN"/>
                                     <constraint firstItem="KLR-Hi-lxJ" firstAttribute="centerX" secondItem="otJ-MO-1zu" secondAttribute="centerX" id="WFC-Ga-RvF"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="200" id="jJu-hP-gOu"/>
                                     <constraint firstItem="Yod-6j-uR7" firstAttribute="centerX" secondItem="otJ-MO-1zu" secondAttribute="centerX" id="q1l-jE-Yzg"/>
+                                    <constraint firstItem="xtm-bH-9vz" firstAttribute="leading" secondItem="otJ-MO-1zu" secondAttribute="leading" id="sqV-KP-Ank"/>
+                                    <constraint firstAttribute="trailing" secondItem="xtm-bH-9vz" secondAttribute="trailing" id="tcj-4k-P6k"/>
                                     <constraint firstItem="KLR-Hi-lxJ" firstAttribute="top" secondItem="Yod-6j-uR7" secondAttribute="bottom" constant="20" id="ysc-7J-zZ1"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M7J-hF-CIq">
+                                <rect key="frame" x="0.0" y="320" width="375" height="120"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0a2-mX-p3h">
+                                        <rect key="frame" x="40" y="20" width="108" height="30"/>
+                                        <state key="normal" title="开始录制到文件"/>
+                                        <connections>
+                                            <action selector="didClickRecordAudioFileButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vBY-uc-1rF"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aqv-C2-QcN">
+                                        <rect key="frame" x="32.5" y="70" width="123" height="30"/>
+                                        <state key="normal" title="开始播放录制文件"/>
+                                        <connections>
+                                            <action selector="didClickStartPlayRecordAudioFileButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Es8-Jv-Ri0"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9kV-vK-TTs">
+                                        <rect key="frame" x="227.5" y="20" width="108" height="30"/>
+                                        <state key="normal" title="停止录制到文件"/>
+                                        <connections>
+                                            <action selector="didClickStopRecordAudioFileButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DW5-Lt-pzL"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HkG-V5-MfY">
+                                        <rect key="frame" x="220" y="70" width="123" height="30"/>
+                                        <state key="normal" title="停止播放录制文件"/>
+                                        <connections>
+                                            <action selector="didClickStopPlayRecordAudioFileButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="H74-J7-HYB"/>
+                                        </connections>
+                                    </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3iY-td-KUw">
+                                        <rect key="frame" x="0.0" y="119" width="375" height="1"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="Hw7-bj-E8b"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="3iY-td-KUw" secondAttribute="trailing" id="4zO-qj-Jq4"/>
+                                    <constraint firstAttribute="bottom" secondItem="3iY-td-KUw" secondAttribute="bottom" id="GdI-Ke-UOD"/>
+                                    <constraint firstItem="aqv-C2-QcN" firstAttribute="top" secondItem="0a2-mX-p3h" secondAttribute="bottom" constant="20" id="LsL-1S-UZc"/>
+                                    <constraint firstItem="HkG-V5-MfY" firstAttribute="centerY" secondItem="aqv-C2-QcN" secondAttribute="centerY" id="OTV-Xx-ebZ"/>
+                                    <constraint firstItem="3iY-td-KUw" firstAttribute="leading" secondItem="M7J-hF-CIq" secondAttribute="leading" id="S0n-To-1bg"/>
+                                    <constraint firstItem="9kV-vK-TTs" firstAttribute="centerX" secondItem="M7J-hF-CIq" secondAttribute="centerX" multiplier="1.5" id="TkU-df-3RW"/>
+                                    <constraint firstItem="0a2-mX-p3h" firstAttribute="centerX" secondItem="M7J-hF-CIq" secondAttribute="centerX" multiplier="0.5" id="UWi-lY-zzA"/>
+                                    <constraint firstItem="9kV-vK-TTs" firstAttribute="centerY" secondItem="0a2-mX-p3h" secondAttribute="centerY" id="XHN-Fe-Dc1"/>
+                                    <constraint firstAttribute="height" constant="120" id="dLR-IX-j9d"/>
+                                    <constraint firstItem="0a2-mX-p3h" firstAttribute="top" secondItem="M7J-hF-CIq" secondAttribute="top" constant="20" id="jkr-8h-eR1"/>
+                                    <constraint firstItem="aqv-C2-QcN" firstAttribute="centerX" secondItem="M7J-hF-CIq" secondAttribute="centerX" multiplier="0.5" id="sp3-Pn-IaU"/>
+                                    <constraint firstItem="HkG-V5-MfY" firstAttribute="centerX" secondItem="9kV-vK-TTs" secondAttribute="centerX" id="x2i-gn-GTe"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rmD-4m-NWk">
+                                <rect key="frame" x="0.0" y="440" width="375" height="100"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GDD-eL-g7Q">
+                                        <rect key="frame" x="32.5" y="20" width="123" height="30"/>
+                                        <state key="normal" title="开始录制到文件流"/>
+                                        <connections>
+                                            <action selector="didClickRecordFileStreamButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Buf-5B-uxS"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iKv-Ez-qDb">
+                                        <rect key="frame" x="25" y="70" width="138" height="30"/>
+                                        <state key="normal" title="开始播放录制文件流"/>
+                                        <connections>
+                                            <action selector="didClickStartPlayFileStreamButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nGQ-qY-UC0"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jbl-kV-CWu">
+                                        <rect key="frame" x="220" y="20" width="123" height="30"/>
+                                        <state key="normal" title="停止录制到文件流"/>
+                                        <connections>
+                                            <action selector="didClickStopRecordFileStreamButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZNj-jY-xNG"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZdW-zy-S0x">
+                                        <rect key="frame" x="212.5" y="70" width="138" height="30"/>
+                                        <state key="normal" title="停止播放录制文件流"/>
+                                        <connections>
+                                            <action selector="didClickStopPlayFileStreamButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iVT-Po-Zbg"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="iKv-Ez-qDb" firstAttribute="top" secondItem="GDD-eL-g7Q" secondAttribute="bottom" constant="20" id="Cbq-gz-2fV"/>
+                                    <constraint firstItem="ZdW-zy-S0x" firstAttribute="centerY" secondItem="iKv-Ez-qDb" secondAttribute="centerY" id="ELR-Td-czd"/>
+                                    <constraint firstItem="ZdW-zy-S0x" firstAttribute="centerX" secondItem="Jbl-kV-CWu" secondAttribute="centerX" id="HaT-8Z-55G"/>
+                                    <constraint firstItem="Jbl-kV-CWu" firstAttribute="centerX" secondItem="rmD-4m-NWk" secondAttribute="centerX" multiplier="1.5" id="Pqx-48-5Kq"/>
+                                    <constraint firstItem="GDD-eL-g7Q" firstAttribute="centerX" secondItem="rmD-4m-NWk" secondAttribute="centerX" multiplier="0.5" id="bQB-Gx-dYx"/>
+                                    <constraint firstItem="iKv-Ez-qDb" firstAttribute="centerX" secondItem="rmD-4m-NWk" secondAttribute="centerX" multiplier="0.5" id="dXM-vl-STt"/>
+                                    <constraint firstItem="Jbl-kV-CWu" firstAttribute="centerY" secondItem="GDD-eL-g7Q" secondAttribute="centerY" id="lg6-Lf-9QE"/>
+                                    <constraint firstItem="GDD-eL-g7Q" firstAttribute="top" secondItem="rmD-4m-NWk" secondAttribute="top" constant="20" id="lmP-RW-1g0"/>
+                                    <constraint firstAttribute="height" constant="100" id="toF-oJ-gPe"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="M7J-hF-CIq" firstAttribute="top" secondItem="otJ-MO-1zu" secondAttribute="bottom" id="21g-0F-UoI"/>
+                            <constraint firstItem="M7J-hF-CIq" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="HTN-Ng-t0s"/>
+                            <constraint firstAttribute="trailing" secondItem="M7J-hF-CIq" secondAttribute="trailing" id="K2K-wh-8XF"/>
                             <constraint firstAttribute="trailing" secondItem="0Tu-dB-AB8" secondAttribute="trailing" id="U1G-zX-bwH"/>
                             <constraint firstAttribute="trailing" secondItem="otJ-MO-1zu" secondAttribute="trailing" id="Zxd-3r-pnU"/>
+                            <constraint firstItem="rmD-4m-NWk" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="cQ6-X1-9bS"/>
                             <constraint firstItem="otJ-MO-1zu" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="d81-MN-IYi"/>
                             <constraint firstItem="0Tu-dB-AB8" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="dLa-tr-kRe"/>
+                            <constraint firstItem="rmD-4m-NWk" firstAttribute="top" secondItem="M7J-hF-CIq" secondAttribute="bottom" id="dtJ-3w-ovp"/>
+                            <constraint firstAttribute="trailing" secondItem="rmD-4m-NWk" secondAttribute="trailing" id="dve-9b-O9R"/>
                             <constraint firstItem="otJ-MO-1zu" firstAttribute="top" secondItem="0Tu-dB-AB8" secondAttribute="bottom" id="mJx-OO-dLn"/>
                             <constraint firstItem="0Tu-dB-AB8" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="v0M-DI-BYj"/>
                         </constraints>

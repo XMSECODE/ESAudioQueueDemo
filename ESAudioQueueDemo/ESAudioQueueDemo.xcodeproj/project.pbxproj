@@ -22,6 +22,7 @@
 		F058B5641F3C48FC003081CF /* test.pcm in Resources */ = {isa = PBXBuildFile; fileRef = F058B5631F3C48FC003081CF /* test.pcm */; };
 		F058B5661F3C4CFA003081CF /* pcmHead in Resources */ = {isa = PBXBuildFile; fileRef = F058B5651F3C4CFA003081CF /* pcmHead */; };
 		F058B5691F3C5377003081CF /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = F058B5681F3C5377003081CF /* Base64.m */; };
+		F06464042100831B000BBA9C /* ESCAudioRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = F06464032100831B000BBA9C /* ESCAudioRecorder.m */; };
 		F079562020FED23C00F3AF26 /* ESCAudioStreamPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = F079561F20FED23C00F3AF26 /* ESCAudioStreamPlayer.m */; };
 		F079562220FED2D800F3AF26 /* vocal.pcm in Resources */ = {isa = PBXBuildFile; fileRef = F079562120FED2D700F3AF26 /* vocal.pcm */; };
 /* End PBXBuildFile section */
@@ -48,6 +49,8 @@
 		F058B5651F3C4CFA003081CF /* pcmHead */ = {isa = PBXFileReference; lastKnownFileType = file; path = pcmHead; sourceTree = "<group>"; };
 		F058B5671F3C5377003081CF /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64.h; sourceTree = "<group>"; };
 		F058B5681F3C5377003081CF /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64.m; sourceTree = "<group>"; };
+		F06464022100831B000BBA9C /* ESCAudioRecorder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESCAudioRecorder.h; sourceTree = "<group>"; };
+		F06464032100831B000BBA9C /* ESCAudioRecorder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ESCAudioRecorder.m; sourceTree = "<group>"; };
 		F079561E20FED23C00F3AF26 /* ESCAudioStreamPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESCAudioStreamPlayer.h; sourceTree = "<group>"; };
 		F079561F20FED23C00F3AF26 /* ESCAudioStreamPlayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ESCAudioStreamPlayer.m; sourceTree = "<group>"; };
 		F079562120FED2D700F3AF26 /* vocal.pcm */ = {isa = PBXFileReference; lastKnownFileType = file; path = vocal.pcm; sourceTree = "<group>"; };
@@ -126,6 +129,8 @@
 			children = (
 				F058B5671F3C5377003081CF /* Base64.h */,
 				F058B5681F3C5377003081CF /* Base64.m */,
+				F06464022100831B000BBA9C /* ESCAudioRecorder.h */,
+				F06464032100831B000BBA9C /* ESCAudioRecorder.m */,
 				F079561E20FED23C00F3AF26 /* ESCAudioStreamPlayer.h */,
 				F079561F20FED23C00F3AF26 /* ESCAudioStreamPlayer.m */,
 				0474207A20FCF10B00CB641E /* ESCAudioQueuePlayer.h */,
@@ -214,6 +219,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F06464042100831B000BBA9C /* ESCAudioRecorder.m in Sources */,
 				F058B5691F3C5377003081CF /* Base64.m in Sources */,
 				F079562020FED23C00F3AF26 /* ESCAudioStreamPlayer.m in Sources */,
 				043CADC21F13DF81001A0671 /* ViewController.m in Sources */,
