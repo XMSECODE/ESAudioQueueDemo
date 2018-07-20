@@ -54,6 +54,9 @@ typedef struct {
 @property(nonatomic,copy)NSString* recordFileStreamPath;
 @property(nonatomic,strong)NSFileHandle* audioStreamFileHandle;
 
+@property(nonatomic,strong)ESCAudioRecorder* sameTimeRecorder;
+@property(nonatomic,strong)ESCAudioStreamPlayer* sameTimePlayer;
+
 @end
 
 @implementation ViewController
@@ -181,13 +184,14 @@ int convertPcm2Wav(char *src_file, char *dst_file, int channels, int sample_rate
     self.streamPlayer = [[ESCAudioStreamPlayer alloc] initWithSampleRate:44100 formatID:kAudioFormatLinearPCM formatFlags:kAudioFormatFlagIsSignedInteger | kAudioFormatFlagIsPacked channelsPerFrame:2 bitsPerChannel:16 framesPerPacket:1];
     NSString *pcmFilePath = [[NSBundle mainBundle] pathForResource:@"vocal.pcm" ofType:nil];
     
-    //    self.streamPlayer = [[ESCAudioStreamPlayer alloc] initWithSampleRate:8000 formatID:kAudioFormatLinearPCM formatFlags:kAudioFormatFlagIsSignedInteger | kAudioFormatFlagIsPacked channelsPerFrame:1 bitsPerChannel:16];
-    //    NSString *pcmFilePath = [[NSBundle mainBundle] pathForResource:@"1708101114545.pcm" ofType:nil];
+//        self.streamPlayer = [[ESCAudioStreamPlayer alloc] initWithSampleRate:8000 formatID:kAudioFormatLinearPCM formatFlags:kAudioFormatFlagIsSignedInteger | kAudioFormatFlagIsPacked channelsPerFrame:1 bitsPerChannel:16 framesPerPacket:1];
+//        NSString *pcmFilePath = [[NSBundle mainBundle] pathForResource:@"1708101114545.pcm" ofType:nil];
     //
-    
+//    self.streamPlayer = [[ESCAudioStreamPlayer alloc] initWithSampleRate:44100 formatID:kAudioFormatLinearPCM formatFlags:kAudioFormatFlagIsSignedInteger | kAudioFormatFlagIsPacked channelsPerFrame:1 bitsPerChannel:16 framesPerPacket:1];
+//    NSString *pcmFilePath = [[NSBundle mainBundle] pathForResource:@"tem.pcm" ofType:nil];
     
     NSData *pcmData = [NSData dataWithContentsOfFile:pcmFilePath];
-    NSInteger count = 100;
+    NSInteger count = pcmData.length / 2000;
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         for (int i = 0; i < count; i++) {
             NSInteger lenth = pcmData.length / count;
@@ -272,9 +276,29 @@ int convertPcm2Wav(char *src_file, char *dst_file, int channels, int sample_rate
 - (IBAction)didClickStopPlayFileStreamButton:(id)sender {
     [self.recorderFileStreamPlayer stop];
 }
+- (IBAction)didClickrecordPlayButton:(id)sender {
+    if (self.sameTimePlayer == nil) {
+        self.sameTimePlayer = [[ESCAudioStreamPlayer alloc] initWithSampleRate:24000 formatID:kAudioFormatLinearPCM formatFlags:kAudioFormatFlagIsSignedInteger | kAudioFormatFlagIsPacked channelsPerFrame:1 bitsPerChannel:32 framesPerPacket:1];
+        self.sameTimeRecorder = [[ESCAudioRecorder alloc] initWithSampleRate:24000 formatID:kAudioFormatLinearPCM formatFlags:kAudioFormatFlagIsSignedInteger | kAudioFormatFlagIsPacked channelsPerFrame:1 bitsPerChannel:32 framesPerPacket:1];
+        self.sameTimeRecorder.delegate = self;
+        [self.sameTimeRecorder startRecordToStream];
+    }
+}
+
+- (IBAction)didClickStopRecordPlayButton:(id)sender {
+    [self.sameTimePlayer stop];
+    [self.sameTimeRecorder stopRecordToStream];
+    self.sameTimePlayer = nil;
+    self.sameTimeRecorder = nil;
+}
 
 #pragma mark - ESCAudioRecorderDelegate
 - (void)ESCAudioRecorderReceiveAudioData:(NSData *)audioData {
-    [self.audioStreamFileHandle writeData:audioData];
+    if (self.audioStreamFileHandle) {
+        [self.audioStreamFileHandle writeData:audioData];
+    }
+    if (self.sameTimePlayer) {
+        [self.sameTimePlayer play:audioData];
+    }
 }
 @end

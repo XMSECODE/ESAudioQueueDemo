@@ -25,6 +25,7 @@
 		F06464042100831B000BBA9C /* ESCAudioRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = F06464032100831B000BBA9C /* ESCAudioRecorder.m */; };
 		F079562020FED23C00F3AF26 /* ESCAudioStreamPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = F079561F20FED23C00F3AF26 /* ESCAudioStreamPlayer.m */; };
 		F079562220FED2D800F3AF26 /* vocal.pcm in Resources */ = {isa = PBXBuildFile; fileRef = F079562120FED2D700F3AF26 /* vocal.pcm */; };
+		F099B81F2101D56D00C851BE /* tem.pcm in Resources */ = {isa = PBXBuildFile; fileRef = F099B81E2101D56D00C851BE /* tem.pcm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		F079561E20FED23C00F3AF26 /* ESCAudioStreamPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESCAudioStreamPlayer.h; sourceTree = "<group>"; };
 		F079561F20FED23C00F3AF26 /* ESCAudioStreamPlayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ESCAudioStreamPlayer.m; sourceTree = "<group>"; };
 		F079562120FED2D700F3AF26 /* vocal.pcm */ = {isa = PBXFileReference; lastKnownFileType = file; path = vocal.pcm; sourceTree = "<group>"; };
+		F099B81E2101D56D00C851BE /* tem.pcm */ = {isa = PBXFileReference; lastKnownFileType = file; path = tem.pcm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +113,7 @@
 		0474207C20FCF1DC00CB641E /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				F099B81E2101D56D00C851BE /* tem.pcm */,
 				043CADC61F13DF81001A0671 /* Assets.xcassets */,
 				F079562120FED2D700F3AF26 /* vocal.pcm */,
 				F058B5651F3C4CFA003081CF /* pcmHead */,
@@ -201,6 +204,7 @@
 				F058B5641F3C48FC003081CF /* test.pcm in Resources */,
 				F058B5661F3C4CFA003081CF /* pcmHead in Resources */,
 				F058B55E1F3C3AF8003081CF /* 1708101114545.pcm in Resources */,
+				F099B81F2101D56D00C851BE /* tem.pcm in Resources */,
 				F079562220FED2D800F3AF26 /* vocal.pcm in Resources */,
 				F058B5601F3C3B2C003081CF /* an.pcm in Resources */,
 				F058B5621F3C3DBD003081CF /* PrinRecord20170810120307.pcm in Resources */,
