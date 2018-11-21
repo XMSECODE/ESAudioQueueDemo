@@ -55,16 +55,19 @@
 - (void)startRecordToFilePath:(NSString *)filePath {
     AVAudioSession *session = [AVAudioSession sharedInstance];
     NSError *sessionError;
+    //设置我们需要的功能
     [session setCategory:AVAudioSessionCategoryPlayAndRecord error:&sessionError];
     if (session == nil) {
         NSLog(@"Error creating session: %@",[sessionError description]);
     }else{
+        //设置成功则启动激活会话
         [session setActive:YES error:nil];
     }
+    //录制文件的路径
     self.recordFileUrl = [NSURL fileURLWithPath:filePath];
 
     if ([[[UIDevice currentDevice] systemVersion] floatValue] < 10.0) {
-        //设置参数
+        //iOS10之前设置参数为字典设置
         NSDictionary *dict = @{AVSampleRateKey:@(audioDescription.mSampleRate),//采样率 8000/11025/22050/44100/96000（影响音频的质量）
                                AVFormatIDKey:@(audioDescription.mFormatID),// 音频格式
                                AVLinearPCMBitDepthKey:@(audioDescription.mBitsPerChannel), //采样位数 8、16、24、32, 默认为16
@@ -74,12 +77,13 @@
                                };
         self.recorder = [[AVAudioRecorder alloc] initWithURL:self.recordFileUrl settings:dict error:&sessionError];
     }else {
+        //audioDescription为第一步创建的格式对象
+        self.audioFormat = [[AVAudioFormat alloc] initWithStreamDescription:&(audioDescription)];
+        //iOS10后可以直接传入AVAudioFormat对象
         self.recorder = [[AVAudioRecorder alloc] initWithURL:self.recordFileUrl format:self.audioFormat error:&sessionError];
     }
     
     if (self.recorder) {
-        self.recorder.meteringEnabled = YES;
-        [self.recorder prepareToRecord];
         [self.recorder record];
     }else{
         NSLog(@"音频格式和文件存储格式不匹配,无法初始化Recorder");

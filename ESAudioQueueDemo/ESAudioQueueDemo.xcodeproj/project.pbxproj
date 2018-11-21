@@ -23,6 +23,8 @@
 		F058B5661F3C4CFA003081CF /* pcmHead in Resources */ = {isa = PBXBuildFile; fileRef = F058B5651F3C4CFA003081CF /* pcmHead */; };
 		F058B5691F3C5377003081CF /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = F058B5681F3C5377003081CF /* Base64.m */; };
 		F06464042100831B000BBA9C /* ESCAudioRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = F06464032100831B000BBA9C /* ESCAudioRecorder.m */; };
+		F064FEA62192C18000A6F58C /* vocal2.pcm in Resources */ = {isa = PBXBuildFile; fileRef = F064FEA52192C18000A6F58C /* vocal2.pcm */; };
+		F064FEAA2192C88600A6F58C /* 8000_1_16.pcm in Resources */ = {isa = PBXBuildFile; fileRef = F064FEA92192C88600A6F58C /* 8000_1_16.pcm */; };
 		F079562020FED23C00F3AF26 /* ESCAudioStreamPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = F079561F20FED23C00F3AF26 /* ESCAudioStreamPlayer.m */; };
 		F079562220FED2D800F3AF26 /* vocal.pcm in Resources */ = {isa = PBXBuildFile; fileRef = F079562120FED2D700F3AF26 /* vocal.pcm */; };
 		F099B81F2101D56D00C851BE /* tem.pcm in Resources */ = {isa = PBXBuildFile; fileRef = F099B81E2101D56D00C851BE /* tem.pcm */; };
@@ -52,6 +54,8 @@
 		F058B5681F3C5377003081CF /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64.m; sourceTree = "<group>"; };
 		F06464022100831B000BBA9C /* ESCAudioRecorder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESCAudioRecorder.h; sourceTree = "<group>"; };
 		F06464032100831B000BBA9C /* ESCAudioRecorder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ESCAudioRecorder.m; sourceTree = "<group>"; };
+		F064FEA52192C18000A6F58C /* vocal2.pcm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vocal2.pcm; sourceTree = "<group>"; };
+		F064FEA92192C88600A6F58C /* 8000_1_16.pcm */ = {isa = PBXFileReference; lastKnownFileType = file; path = 8000_1_16.pcm; sourceTree = "<group>"; };
 		F079561E20FED23C00F3AF26 /* ESCAudioStreamPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESCAudioStreamPlayer.h; sourceTree = "<group>"; };
 		F079561F20FED23C00F3AF26 /* ESCAudioStreamPlayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ESCAudioStreamPlayer.m; sourceTree = "<group>"; };
 		F079562120FED2D700F3AF26 /* vocal.pcm */ = {isa = PBXFileReference; lastKnownFileType = file; path = vocal.pcm; sourceTree = "<group>"; };
@@ -113,6 +117,7 @@
 		0474207C20FCF1DC00CB641E /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				F064FEA92192C88600A6F58C /* 8000_1_16.pcm */,
 				F099B81E2101D56D00C851BE /* tem.pcm */,
 				043CADC61F13DF81001A0671 /* Assets.xcassets */,
 				F079562120FED2D700F3AF26 /* vocal.pcm */,
@@ -121,6 +126,7 @@
 				F058B55F1F3C3B2C003081CF /* an.pcm */,
 				F058B5611F3C3DBD003081CF /* PrinRecord20170810120307.pcm */,
 				F058B55D1F3C3AF8003081CF /* 1708101114545.pcm */,
+				F064FEA52192C18000A6F58C /* vocal2.pcm */,
 				046AB0381F2CC4D500B85CE8 /* Bridge - 雾都历.mp3 */,
 				046AB03A1F2CC5DE00B85CE8 /* G.E.M.邓紫棋 - 喜欢你.mp3 */,
 			);
@@ -207,10 +213,12 @@
 				F099B81F2101D56D00C851BE /* tem.pcm in Resources */,
 				F079562220FED2D800F3AF26 /* vocal.pcm in Resources */,
 				F058B5601F3C3B2C003081CF /* an.pcm in Resources */,
+				F064FEA62192C18000A6F58C /* vocal2.pcm in Resources */,
 				F058B5621F3C3DBD003081CF /* PrinRecord20170810120307.pcm in Resources */,
 				043CADCA1F13DF81001A0671 /* LaunchScreen.storyboard in Resources */,
 				046AB03B1F2CC5DE00B85CE8 /* G.E.M.邓紫棋 - 喜欢你.mp3 in Resources */,
 				046AB0391F2CC4D500B85CE8 /* Bridge - 雾都历.mp3 in Resources */,
+				F064FEAA2192C88600A6F58C /* 8000_1_16.pcm in Resources */,
 				043CADC71F13DF81001A0671 /* Assets.xcassets in Resources */,
 				043CADC51F13DF81001A0671 /* Main.storyboard in Resources */,
 			);
