@@ -56,9 +56,11 @@ void DeriveBufferSize (AudioStreamBasicDescription inDesc,UInt32 maxPacketSize,F
     static const int minBufferSize = 0x4000;
     
     if (inDesc.mFramesPerPacket != 0) {
+        //如果每个Packet不止一个Frame，则按照包进行计算
         Float64 numPacketsForTime = inDesc.mSampleRate / inDesc.mFramesPerPacket * inSeconds;
         *outBufferSize = numPacketsForTime * maxPacketSize;
     } else {
+        //如果每个Packet只有一个Frame，则直接确定缓冲区大小
         *outBufferSize = maxBufferSize > maxPacketSize ? maxBufferSize : maxPacketSize;
     }
     
